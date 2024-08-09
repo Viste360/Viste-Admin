@@ -1,4 +1,5 @@
 export interface User {
+	_id: string;
 	name: string;
 	email: string;
 	image?: string;
@@ -11,3 +12,20 @@ export interface User {
 	createdAt: Date;
 	updatedAt: Date;
 }
+
+export type SignUpUser = {
+	firstName: string;
+	lastName: string;
+	email: string;
+	password: string;
+};
+
+export type LoginUser = {
+	email: string;
+	password: string;
+};
+
+export type ResetPassword = {
+	password: string;
+	confirmPassword: string;
+};

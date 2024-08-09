@@ -1,5 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit/react";
-import { keepLoginAction } from "../actions/userAction";
+import {
+	forgotPasswordAction,
+	loginAction,
+	logoutAction,
+	resetPasswordAction,
+	signUpAction,
+	verifyEmailAction,
+} from "../actions/userAction";
 
 type initialState = {
 	error?: string | null;
@@ -34,8 +41,55 @@ export const appSlice = createSlice({
 		},
 	},
 	extraReducers: (builders) => {
-		builders.addCase(keepLoginAction.rejected, (state, action) => {
+		// signUp
+		builders.addCase(signUpAction.rejected, (state, action) => {
 			state.error = action.payload;
+		});
+		builders.addCase(signUpAction.fulfilled, (state, action) => {
+			state.success = action.payload;
+		});
+
+		// verifyEmail
+		builders.addCase(verifyEmailAction.rejected, (state, action) => {
+			state.error = action.payload;
+		});
+		builders.addCase(verifyEmailAction.fulfilled, (state, action) => {
+			state.success = action.payload;
+		});
+
+		// login
+		builders.addCase(loginAction.rejected, (state, action) => {
+			state.error = action.payload;
+		});
+		builders.addCase(
+			loginAction.fulfilled,
+			(state, action: PayloadAction<{ message: string }>) => {
+				state.success = action.payload.message;
+			}
+		);
+
+		// logout
+		builders.addCase(logoutAction.rejected, (state, action) => {
+			state.error = action.payload;
+		});
+		builders.addCase(logoutAction.fulfilled, (state, action) => {
+			state.success = action.payload;
+		});
+
+		// forgotPassword
+		builders.addCase(forgotPasswordAction.rejected, (state, action) => {
+			state.error = action.payload;
+		});
+		builders.addCase(forgotPasswordAction.fulfilled, (state, action) => {
+			state.success = action.payload;
+		});
+
+		// resetPasword
+		builders.addCase(resetPasswordAction.rejected, (state, action) => {
+			state.error = action.payload;
+		});
+		builders.addCase(resetPasswordAction.fulfilled, (state, action) => {
+			state.success = action.payload;
 		});
 	},
 });
