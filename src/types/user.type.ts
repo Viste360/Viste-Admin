@@ -14,8 +14,7 @@ export interface User {
 }
 
 export type SignUpUser = {
-	firstName: string;
-	lastName: string;
+	name: string;
 	email: string;
 	password: string;
 };
