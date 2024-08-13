@@ -1,4 +1,5 @@
 "use client";
+
 import Loader from "@/components/Loader";
 import { useAppSelector } from "@/redux/hooks";
 import { redirect } from "next/navigation";

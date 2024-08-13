@@ -1,12 +1,15 @@
 "use client";
 
+import AuthLayout from "@/components/layout/AuthLayout";
 import UnAuthGuard from "@/hoc/UnAuthGuard";
-import { useAppDispatch } from "@/redux/hooks";
 import React from "react";
 
 const Login = () => {
-	const dispatch = useAppDispatch();
-	return <div>login</div>;
+	return (
+		<AuthLayout>
+			<div>login</div>
+		</AuthLayout>
+	);
 };
 
 export default UnAuthGuard(Login);

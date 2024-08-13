@@ -1,9 +1,10 @@
 import axios, { AxiosInstance } from "axios";
-import { appConfig } from "./utils";
 
-const { baseURL } = appConfig;
+export const appConfig = {
+	baseURL: "http://localhost:8000/api",
+};
 
 export const axiosInstance: AxiosInstance = axios.create({
-	baseURL,
+	baseURL: appConfig.baseURL,
 	withCredentials: true,
 });

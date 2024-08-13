@@ -1,6 +1,6 @@
-import { object, string } from "yup";
+import { ObjectSchema, object, string } from "yup";
 
-const validationSchema = object().shape({
+const validationSchema: ObjectSchema<{ email: string }> = object().shape({
 	email: string().email("Invalid Email").required("Email is required"),
 });
 
