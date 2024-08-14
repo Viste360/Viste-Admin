@@ -14,12 +14,14 @@ type UserState = {
 	isLoading: boolean;
 	user: User | null;
 	isAuthenticated: boolean;
+	formSubmitting: boolean
 };
 
 const initialState: UserState = {
-	isLoading: true,
+	isLoading: false,
 	user: null,
 	isAuthenticated: false,
+	formSubmitting: false
 };
 
 export const userSlice = createSlice({
@@ -43,37 +45,37 @@ export const userSlice = createSlice({
 
 		// signUp
 		builders.addCase(signUpAction.pending, (state) => {
-			state.isLoading = true;
+			state.formSubmitting = true;
 		});
 		builders.addCase(signUpAction.fulfilled, (state) => {
-			state.isLoading = false;
+			state.formSubmitting = false;
 		});
 		builders.addCase(signUpAction.rejected, (state) => {
-			state.isLoading = false;
+			state.formSubmitting = false;
 		});
 
 		// verifyEmail
 		builders.addCase(verifyEmailAction.pending, (state) => {
-			state.isLoading = true;
+			state.formSubmitting = true;
 		});
 		builders.addCase(verifyEmailAction.fulfilled, (state) => {
-			state.isLoading = false;
+			state.formSubmitting = false;
 		});
 		builders.addCase(verifyEmailAction.rejected, (state) => {
-			state.isLoading = false;
+			state.formSubmitting = false;
 		});
 
 		// login
 		builders.addCase(loginAction.pending, (state) => {
-			state.isLoading = true;
+			state.formSubmitting = true;
 		});
 		builders.addCase(loginAction.fulfilled, (state, action: PayloadAction<{ user: User }>) => {
-			state.isLoading = false;
+			state.formSubmitting = false;
 			state.isAuthenticated = true;
 			state.user = action.payload.user;
 		});
 		builders.addCase(loginAction.rejected, (state) => {
-			state.isLoading = false;
+			state.formSubmitting = false;
 			state.isAuthenticated = false;
 		});
 
@@ -92,24 +94,24 @@ export const userSlice = createSlice({
 
 		// forgotPassword
 		builders.addCase(forgotPasswordAction.pending, (state) => {
-			state.isLoading = true;
+			state.formSubmitting = true;
 		});
 		builders.addCase(forgotPasswordAction.fulfilled, (state) => {
-			state.isLoading = false;
+			state.formSubmitting = false;
 		});
 		builders.addCase(forgotPasswordAction.rejected, (state) => {
-			state.isLoading = false;
+			state.formSubmitting = false;
 		});
 
-		// forgotPassword
+		// resetPassword
 		builders.addCase(resetPasswordAction.pending, (state) => {
-			state.isLoading = true;
+			state.formSubmitting = true;
 		});
 		builders.addCase(resetPasswordAction.fulfilled, (state) => {
-			state.isLoading = false;
+			state.formSubmitting = false;
 		});
 		builders.addCase(resetPasswordAction.rejected, (state) => {
-			state.isLoading = false;
+			state.formSubmitting = false;
 		});
 	},
 });

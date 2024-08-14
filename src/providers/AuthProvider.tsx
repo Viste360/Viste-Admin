@@ -8,7 +8,7 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
-		dispatch(keepLoginAction());
+		// dispatch(keepLoginAction());
 	}, []);
 
 	return <>{children}</>;

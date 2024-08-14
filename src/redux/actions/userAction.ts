@@ -80,6 +80,8 @@ export const loginAction = createAsyncThunk<
 	{ rejectValue: string }
 >("user/login", async (payload, thunkApi) => {
 	try {
+
+		console.log("submitting")
 		const { data } = await loginApi(payload);
 
 		return data;
