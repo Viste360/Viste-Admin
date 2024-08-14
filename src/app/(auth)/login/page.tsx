@@ -35,7 +35,9 @@ const Login = () => {
 						onSubmit={handleSubmit}
 						className=" flex flex-col justify-center w-10/12 sm:w-1/2 lg:w-8/12 xl:w-1/2 2xl:w-1/3 gap-2"
 					>
-						<h2 className="font-semibold text-black-1 text-center lg:text-start">Welcome back</h2>
+						<h2 className="font-semibold text-black-1 text-center lg:text-start">
+							Welcome back
+						</h2>
 						<h6 className="text-black-4 text-center lg:text-start mb-6 mt-2">
 							Welcome back! Please enter your details.
 						</h6>
@@ -77,6 +79,12 @@ const Login = () => {
 						<Button className="mt-6" variant="customSubmit" type="submit" size="full">
 							{formSubmitting ? "Loading...." : "Sign in"}
 						</Button>
+						<div className="flex justify-center items-center gap-1 text-black-4 mt-2">
+							<p>Don't have an account?</p>
+							<Link className="text-red-3 text-sm" href={"/signup"}>
+								Sign Up
+							</Link>
+						</div>
 					</form>
 				</div>
 			</main>
