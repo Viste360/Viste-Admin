@@ -37,6 +37,7 @@ const FormInput: React.FC<FormInputProps> = ({
 			</Label>
 			<Input
 				name={name}
+				id={name}
 				type={type}
 				placeholder={placeholder}
 				disabled={disabled}

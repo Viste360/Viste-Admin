@@ -4,29 +4,34 @@ import FormInput from "@/components/FormInput";
 import AuthLayout from "@/components/layout/AuthLayout";
 import { Button } from "@/components/ui/button";
 import UnAuthGuard from "@/hoc/UnAuthGuard";
-import React from "react";
+import React, { useEffect } from "react";
 import validationSchema from "./validationSchema";
 import { useFormik } from "formik";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { signUpAction } from "@/redux/actions/userAction";
-import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
 
 const SignUp = () => {
 	const dispatch = useAppDispatch();
-	const { formSubmitting } = useAppSelector((state) => state.userState);
-	const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormik({
-		initialValues: {
-			name: "",
-			email: "",
-			password: "",
-		},
-		validationSchema,
-		onSubmit: (values) => {
-			dispatch(signUpAction(values));
-		},
-	});
+	const { formSubmitting, formSubmitted } = useAppSelector((state) => state.userState);
+	const { values, errors, touched, handleChange, handleBlur, handleSubmit, resetForm } =
+		useFormik({
+			initialValues: {
+				name: "",
+				email: "",
+				password: "",
+			},
+			validationSchema,
+			onSubmit: (values) => {
+				dispatch(signUpAction(values));
+			},
+		});
+
+	useEffect(() => {
+		if (formSubmitted) {
+			resetForm();
+		}
+	}, [formSubmitted]);
 
 	return (
 		<AuthLayout>
@@ -37,10 +42,10 @@ const SignUp = () => {
 						className=" flex flex-col justify-center w-10/12 sm:w-1/2 lg:w-8/12 xl:w-1/2 2xl:w-1/3 gap-2"
 					>
 						<h2 className="font-semibold text-black-1 text-center lg:text-start">
-							Welcome back
+							Sign Up
 						</h2>
 						<h6 className="text-black-4 text-center lg:text-start mb-6 mt-2">
-							Welcome back! Please enter your details.
+							Submit your details to create account.
 						</h6>
 						<FormInput
 							type="text"
@@ -79,7 +84,7 @@ const SignUp = () => {
 							disabled={formSubmitting}
 						/>
 						<Button className="mt-1" variant="customSubmit" type="submit" size="full">
-							{formSubmitting ? "Loading...." : "Sign in"}
+							{formSubmitting ? "Loading...." : "Sign Up"}
 						</Button>
 						<div className="flex justify-center items-center gap-1 text-black-4 mt-2">
 							<p>Already have an account?</p>

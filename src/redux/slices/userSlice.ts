@@ -14,14 +14,16 @@ type UserState = {
 	isLoading: boolean;
 	user: User | null;
 	isAuthenticated: boolean;
-	formSubmitting: boolean
+	formSubmitting: boolean;
+	formSubmitted: boolean;
 };
 
 const initialState: UserState = {
 	isLoading: false,
 	user: null,
 	isAuthenticated: false,
-	formSubmitting: false
+	formSubmitting: false,
+	formSubmitted: false,
 };
 
 export const userSlice = createSlice({
@@ -46,37 +48,46 @@ export const userSlice = createSlice({
 		// signUp
 		builders.addCase(signUpAction.pending, (state) => {
 			state.formSubmitting = true;
+			state.formSubmitted = false;
 		});
 		builders.addCase(signUpAction.fulfilled, (state) => {
 			state.formSubmitting = false;
+			state.formSubmitted = true;
 		});
 		builders.addCase(signUpAction.rejected, (state) => {
 			state.formSubmitting = false;
+			state.formSubmitted = false;
 		});
 
 		// verifyEmail
 		builders.addCase(verifyEmailAction.pending, (state) => {
 			state.formSubmitting = true;
+			state.formSubmitted = false;
 		});
 		builders.addCase(verifyEmailAction.fulfilled, (state) => {
 			state.formSubmitting = false;
+			state.formSubmitted = true;
 		});
 		builders.addCase(verifyEmailAction.rejected, (state) => {
 			state.formSubmitting = false;
+			state.formSubmitted = false;
 		});
 
 		// login
 		builders.addCase(loginAction.pending, (state) => {
 			state.formSubmitting = true;
+			state.formSubmitted = false;
 		});
 		builders.addCase(loginAction.fulfilled, (state, action: PayloadAction<{ user: User }>) => {
 			state.formSubmitting = false;
+			state.formSubmitted = true;
 			state.isAuthenticated = true;
 			state.user = action.payload.user;
 		});
 		builders.addCase(loginAction.rejected, (state) => {
 			state.formSubmitting = false;
 			state.isAuthenticated = false;
+			state.formSubmitted = false;
 		});
 
 		// logout
@@ -95,23 +106,29 @@ export const userSlice = createSlice({
 		// forgotPassword
 		builders.addCase(forgotPasswordAction.pending, (state) => {
 			state.formSubmitting = true;
+			state.formSubmitted = false;
 		});
 		builders.addCase(forgotPasswordAction.fulfilled, (state) => {
 			state.formSubmitting = false;
+			state.formSubmitted = true;
 		});
 		builders.addCase(forgotPasswordAction.rejected, (state) => {
 			state.formSubmitting = false;
+			state.formSubmitted = false;
 		});
 
 		// resetPassword
 		builders.addCase(resetPasswordAction.pending, (state) => {
 			state.formSubmitting = true;
+			state.formSubmitted = false;
 		});
 		builders.addCase(resetPasswordAction.fulfilled, (state) => {
 			state.formSubmitting = false;
+			state.formSubmitted = true;
 		});
 		builders.addCase(resetPasswordAction.rejected, (state) => {
 			state.formSubmitting = false;
+			state.formSubmitted = false;
 		});
 	},
 });
