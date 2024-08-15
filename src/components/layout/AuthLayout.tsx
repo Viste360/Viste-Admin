@@ -34,9 +34,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
 						<Image src={"/images/Star.png"} alt="star" width={20} height={20} />
 					</div>
 				</div>
-				<p className="text-violet-1 opacity-70">
-					© All copyright resereved 2024
-				</p>
+				<p className="text-violet-1 opacity-70">© All copyright resereved 2024</p>
 			</div>
 			<div className="w-full lg:w-1/2">{children}</div>
 		</div>

@@ -19,7 +19,7 @@ type UserState = {
 };
 
 const initialState: UserState = {
-	isLoading: false,
+	isLoading: true,
 	user: null,
 	isAuthenticated: false,
 	formSubmitting: false,
