@@ -4,12 +4,12 @@ import DashboardLayout from "@/components/layout/DashboardLayout";
 import AuthGuard from "@/hoc/AuthGuard";
 import React from "react";
 
-const Analytics = () => {
+const Profile = () => {
 	return (
 		<DashboardLayout>
-			<main>Analytics</main>
+			<main>Profile</main>
 		</DashboardLayout>
 	);
 };
 
-export default AuthGuard(Analytics);
+export default AuthGuard(Profile);

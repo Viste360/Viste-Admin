@@ -1,12 +1,15 @@
-'use client';
+"use client";
 
-import AuthGuard from '@/hoc/AuthGuard';
-import React from 'react'
+import DashboardLayout from "@/components/layout/DashboardLayout";
+import AuthGuard from "@/hoc/AuthGuard";
+import React from "react";
 
 const Orders = () => {
-  return (
-    <div>Orders</div>
-  )
-}
+	return (
+		<DashboardLayout>
+			<main>Orders</main>
+		</DashboardLayout>
+	);
+};
 
-export default AuthGuard( Orders);
+export default AuthGuard(Orders);
