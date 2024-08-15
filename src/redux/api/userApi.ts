@@ -14,7 +14,7 @@ export const signUpApi = async (payload: SignUpUser) => {
 };
 
 export const verifyEmailApi = async (token: string) => {
-	const response = await axiosInstance.get("/api/v1/admin/mail/verify" + token);
+	const response = await axiosInstance.get("/api/v1/admin/mail/verify/" + token);
 
 	return response;
 };
@@ -31,14 +31,14 @@ export const logoutApi = async () => {
 	return response;
 };
 
-export const forgotPasswordApi = async (payload: string) => {
+export const forgotPasswordApi = async (payload: { email: string }) => {
 	const response = await axiosInstance.post("/api/v1/admin/password/recovery", payload);
 
 	return response;
 };
 
 export const resetPasswordApi = async (payload: ResetPassword, token: string) => {
-	const response = await axiosInstance.put("/api/v1/admin/password/reset" + token, payload);
+	const response = await axiosInstance.put("/api/v1/admin/password/reset/" + token, payload);
 
 	return response;
 };

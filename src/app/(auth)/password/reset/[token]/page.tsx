@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { resetPasswordAction } from "@/redux/actions/userAction";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { Spinner } from "@/components/ui/spinner";
 
 const ResetPassword = () => {
 	const dispatch = useAppDispatch();
@@ -74,7 +75,7 @@ const ResetPassword = () => {
 							disabled={formSubmitting}
 						/>
 						<Button className="mt-6" variant="customSubmit" type="submit" size="full">
-							{formSubmitting ? "Loading...." : "Reset"}
+							{formSubmitting ? <Spinner size="small" /> : "Reset"}
 						</Button>
 						<div className="flex justify-center items-center gap-1 text-black-4 mt-2">
 							<Link className="text-red-3 text-sm underline" href={"/login"}>

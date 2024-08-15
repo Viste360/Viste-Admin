@@ -1,14 +1,11 @@
 "use client";
 
-import FormInput from "@/components/FormInput";
 import AuthLayout from "@/components/layout/AuthLayout";
 import { Button } from "@/components/ui/button";
 import UnAuthGuard from "@/hoc/UnAuthGuard";
 import React, { useEffect } from "react";
-import { useFormik } from "formik";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { resetPasswordAction, verifyEmailAction } from "@/redux/actions/userAction";
-import Link from "next/link";
+import { verifyEmailAction } from "@/redux/actions/userAction";
 import { useParams, useRouter } from "next/navigation";
 
 const VerifyEmail = () => {

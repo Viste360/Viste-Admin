@@ -44,6 +44,7 @@ const FormInput: React.FC<FormInputProps> = ({
 				onBlur={handleBlur}
 				onChange={handleChange}
 				value={value}
+				autoComplete="on"
 			/>
 			<div className="text-xs text-red-3 min-h-4">{isError ? error : ""}</div>
 		</div>

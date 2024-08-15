@@ -80,8 +80,7 @@ export const loginAction = createAsyncThunk<
 	{ rejectValue: string }
 >("user/login", async (payload, thunkApi) => {
 	try {
-
-		console.log("submitting")
+		console.log("submitting");
 		const { data } = await loginApi(payload);
 
 		return data;
@@ -119,7 +118,7 @@ export const logoutAction = createAsyncThunk<string, void, { rejectValue: string
 	}
 );
 
-export const forgotPasswordAction = createAsyncThunk<string, string, { rejectValue: string }>(
+export const forgotPasswordAction = createAsyncThunk<string, {email: string}, { rejectValue: string }>(
 	"user/forgotPassword",
 	async (payload, thunkApi) => {
 		try {

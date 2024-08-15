@@ -12,6 +12,7 @@ import { loginAction } from "@/redux/actions/userAction";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
+import { Spinner } from "@/components/ui/spinner";
 
 const Login = () => {
 	const dispatch = useAppDispatch();
@@ -84,7 +85,7 @@ const Login = () => {
 							</Link>
 						</div>
 						<Button className="mt-6" variant="customSubmit" type="submit" size="full">
-							{formSubmitting ? "Loading...." : "Sign in"}
+							{formSubmitting ? <Spinner size="small" /> : "Sign in"}
 						</Button>
 						<div className="flex justify-center items-center gap-1 text-black-4 mt-2">
 							<p>Don't have an account?</p>

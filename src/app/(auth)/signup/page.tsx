@@ -10,6 +10,7 @@ import { useFormik } from "formik";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { signUpAction } from "@/redux/actions/userAction";
 import Link from "next/link";
+import { Spinner } from "@/components/ui/spinner";
 
 const SignUp = () => {
 	const dispatch = useAppDispatch();
@@ -84,7 +85,7 @@ const SignUp = () => {
 							disabled={formSubmitting}
 						/>
 						<Button className="mt-1" variant="customSubmit" type="submit" size="full">
-							{formSubmitting ? "Loading...." : "Sign Up"}
+							{formSubmitting ? <Spinner size="small" /> : "Sign Up"}
 						</Button>
 						<div className="flex justify-center items-center gap-1 text-black-4 mt-2">
 							<p>Already have an account?</p>

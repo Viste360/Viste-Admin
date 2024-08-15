@@ -10,6 +10,7 @@ import { useFormik } from "formik";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { forgotPasswordAction } from "@/redux/actions/userAction";
 import Link from "next/link";
+import { Spinner } from "@/components/ui/spinner";
 
 const ForgotPassword = () => {
 	const dispatch = useAppDispatch();
@@ -21,7 +22,7 @@ const ForgotPassword = () => {
 			},
 			validationSchema,
 			onSubmit: (values) => {
-				dispatch(forgotPasswordAction(values.email));
+				dispatch(forgotPasswordAction(values));
 			},
 		});
 
@@ -58,7 +59,7 @@ const ForgotPassword = () => {
 							disabled={formSubmitting}
 						/>
 						<Button className="mt-1" variant="customSubmit" type="submit" size="full">
-							{formSubmitting ? "Loading...." : "Send"}
+							{formSubmitting ?<Spinner size="small" />  : "Send"}
 						</Button>
 						<div className="flex justify-center items-center gap-1 text-black-4 mt-2">
 							<Link className="text-red-3 text-sm underline" href={"/login"}>

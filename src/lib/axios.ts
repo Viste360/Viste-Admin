@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 
 export const appConfig = {
-	baseURL: "http://localhost:8000/api",
+	baseURL: process.env.NEXT_PUBLIC_BASE_API_URL,
 };
 
 export const axiosInstance: AxiosInstance = axios.create({
