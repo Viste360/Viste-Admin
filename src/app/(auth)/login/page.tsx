@@ -88,7 +88,7 @@ const Login = () => {
 							{formSubmitting ? <Spinner size="small" /> : "Sign in"}
 						</Button>
 						<div className="flex justify-center items-center gap-1 text-black-4 mt-2">
-							<p>Don't have an account?</p>
+							<p>Don&apos;t have an account?</p>
 							<Link className="text-red-3 text-sm" href={"/signup"}>
 								Sign Up
 							</Link>

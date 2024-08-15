@@ -29,11 +29,14 @@ const ResetPassword = () => {
 			},
 		});
 
-	useEffect(() => {
-		if (formSubmitted) {
-			resetForm();
-		}
-	}, [formSubmitted]);
+	useEffect(
+		function () {
+			if (formSubmitted) {
+				resetForm();
+			}
+		},
+		[formSubmitted]
+	);
 
 	return (
 		<AuthLayout>
