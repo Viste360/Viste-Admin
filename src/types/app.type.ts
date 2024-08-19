@@ -5,3 +5,8 @@ export type NavigationItem = {
 	route: string;
 	icon: IconType;
 };
+
+export type SubNavigationItem = {
+	label: string;
+	route: string;
+};

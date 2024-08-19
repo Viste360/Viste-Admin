@@ -1,13 +1,13 @@
 import Link from "next/link";
-import { NavigationItem } from "@/types/app.type";
+import { NavigationItem, SubNavigationItem } from "@/types/app.type";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
-type NavItemProps = NavigationItem & {
+type SubNavItemProps = SubNavigationItem & {
 	highlight?: boolean;
 };
 
-const NavItem: React.FC<NavItemProps> = ({ label, route, icon: Icon, highlight = true }) => {
+const NavItem: React.FC<SubNavItemProps> = ({ label, route, highlight = true }) => {
 	const pathname = usePathname();
 	const isActive = pathname.startsWith(route);
 
@@ -15,7 +15,7 @@ const NavItem: React.FC<NavItemProps> = ({ label, route, icon: Icon, highlight =
 		<Link href={route}>
 			<div
 				className={cn(
-					"flex items-center h-12 w-full px-3 py-2 rounded-md transition-colors font-medium",
+					"flex items-center h-10 w-full px-3 py-2 rounded transition-colors font-medium",
 					highlight
 						? isActive
 							? "bg-white-1 text-red-3"
@@ -23,7 +23,6 @@ const NavItem: React.FC<NavItemProps> = ({ label, route, icon: Icon, highlight =
 						: ""
 				)}
 			>
-				<Icon className="mr-4" size={24} />
 				<span>{label}</span>
 			</div>
 		</Link>

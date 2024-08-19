@@ -36,6 +36,7 @@ const config = {
 				"3": "hsl(var(--black-3))",
 				"4": "hsl(var(--black-4))",
 				"5": "hsl(var(--black-5))",
+				"6": "hsl(var(--black-6))",
 			},
 			white: {
 				"1": "hsl(var(--white-1))",

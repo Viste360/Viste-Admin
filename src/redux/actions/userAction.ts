@@ -80,7 +80,6 @@ export const loginAction = createAsyncThunk<
 	{ rejectValue: string }
 >("user/login", async (payload, thunkApi) => {
 	try {
-		console.log("submitting");
 		const { data } = await loginApi(payload);
 
 		return data;
@@ -118,26 +117,27 @@ export const logoutAction = createAsyncThunk<string, void, { rejectValue: string
 	}
 );
 
-export const forgotPasswordAction = createAsyncThunk<string, {email: string}, { rejectValue: string }>(
-	"user/forgotPassword",
-	async (payload, thunkApi) => {
-		try {
-			const { data } = await forgotPasswordApi(payload);
+export const forgotPasswordAction = createAsyncThunk<
+	string,
+	{ email: string },
+	{ rejectValue: string }
+>("user/forgotPassword", async (payload, thunkApi) => {
+	try {
+		const { data } = await forgotPasswordApi(payload);
 
-			return data.message;
-		} catch (err) {
-			if (err instanceof AxiosError) {
-				if (err.response?.data.message) {
-					return thunkApi.rejectWithValue(err.response.data.message);
-				} else {
-					return thunkApi.rejectWithValue(err.message);
-				}
+		return data.message;
+	} catch (err) {
+		if (err instanceof AxiosError) {
+			if (err.response?.data.message) {
+				return thunkApi.rejectWithValue(err.response.data.message);
+			} else {
+				return thunkApi.rejectWithValue(err.message);
 			}
-
-			return thunkApi.rejectWithValue("Something went wrong");
 		}
+
+		return thunkApi.rejectWithValue("Something went wrong");
 	}
-);
+});
 
 export const resetPasswordAction = createAsyncThunk<
 	string,
