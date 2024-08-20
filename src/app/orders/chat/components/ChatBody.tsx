@@ -24,7 +24,7 @@ const ChatBody: React.FC<ChatBodyProps> = ({ chat }) => {
 					chat.sender === "admin"
 						? "bg-white-5/60 rounded-xl rounded-tr-none"
 						: "bg-white-1 rounded-lg",
-					"flex-1 p-3 shadow-sm  flex justify-between items-center "
+					"flex-1 p-3 shadow-sm flex justify-between items-center h-full"
 				)}
 			>
 				<h4
@@ -35,7 +35,7 @@ const ChatBody: React.FC<ChatBodyProps> = ({ chat }) => {
 				>
 					{chat.desc}
 				</h4>
-				<div className="flex flex-col justify-between items-end gap-4">
+				<div className="flex flex-col justify-between items-end gap-4 h-full">
 					{chat.sender === "admin" ? (
 						<div className="w-8 h-8"></div>
 					) : (

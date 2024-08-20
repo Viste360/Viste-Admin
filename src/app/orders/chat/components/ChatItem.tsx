@@ -19,7 +19,7 @@ const ChatItem: React.FC<ChatItemProps> = ({ user, selectedUser, selectChat, las
 		<div
 			className={cn(
 				isSelected ? "bg-red-11 border-b-white-3/0" : "border-b-white-3/100",
-				"px-4 py-2 flex flex-col h-32 cursor-pointer justify-center gap-4 border-b rounded"
+				"px-2 py-2 flex flex-col h-36 cursor-pointer justify-center gap-5 border-b rounded"
 			)}
 			onClick={() => selectChat(user)}
 		>
@@ -41,15 +41,20 @@ const ChatItem: React.FC<ChatItemProps> = ({ user, selectedUser, selectChat, las
 					</Avatar>
 					<div className="absolute right-0 bottom-0 w-2 h-2 rounded-full bg-green-2 ring-[2px] ring-white-1"></div>
 				</div>
-				<div className="flex h-full justify-between flex-1 gap-2">
-					<div className="flex flex-col justify-center">
-						<h5 className={cn(isSelected ? "text-red-3" : "text-black-3")}>
+				<div className="flex justify-between flex-1 gap-2">
+					<div className="flex flex-col justify-center w-2/3">
+						<h5
+							className={cn(
+								isSelected ? "text-red-3" : "text-black-3",
+								"truncate whitespace-normal overflow-hidden max-w-xs"
+							)}
+						>
 							{user.name}
 						</h5>
 						<p
 							className={cn(
 								isSelected ? "text-red-4" : "text-black-4",
-								"line-clamp-1 overflow-hidden text-ellipsis"
+								"truncate whitespace-normal overflow-hidden max-w-xs"
 							)}
 						>
 							{user.email}
@@ -58,7 +63,7 @@ const ChatItem: React.FC<ChatItemProps> = ({ user, selectedUser, selectChat, las
 					<p
 						className={cn(
 							isSelected ? "text-red-4" : "text-black-4",
-							"line-clamp-2 overflow-hidden text-ellipsis"
+							"truncate whitespace-normal overflow-hidden max-w-xs w-1/3 text-center"
 						)}
 					>
 						{lastChat &&
@@ -71,7 +76,7 @@ const ChatItem: React.FC<ChatItemProps> = ({ user, selectedUser, selectChat, las
 			<p
 				className={cn(
 					isSelected ? "text-red-4" : "text-black-4",
-					"line-clamp-2 overflow-hidden text-ellipsis"
+					"line-clamp-2 overflow-hidden text-ellipsis px-4"
 				)}
 			>
 				{lastChat?.desc}
