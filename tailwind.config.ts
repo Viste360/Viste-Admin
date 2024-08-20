@@ -44,6 +44,7 @@ const config = {
 				"2": "hsl(var(--white-2))",
 				"3": "hsl(var(--white-3))",
 				"4": "hsl(var(--white-4))",
+				"5": "hsl(var(--white-5))",
 			},
 			green: {
 				"1": "hsl(var(--green-1))",

@@ -13,6 +13,7 @@ import { getUsersChatsAction } from "@/redux/actions/chatAction";
 import { Spinner } from "@/components/ui/spinner";
 import { User } from "@/types/user.type";
 import { Chat } from "@/types/chat.type";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
 const Chat = () => {
 	const [searchKeyword, setSearchKeyword] = useState<string>("");
@@ -82,10 +83,25 @@ const Chat = () => {
 								</div>
 							) : (
 								<>
-									<div className="h-[66.1vh] overflow-y-auto scrollbar-hide">
-										{chats?.map((chat) => (
-											<ChatBody chat={chat} key={chat._id} />
-										))}
+									<div className="h-[66.1vh] flex flex-col">
+										<div className="flex items-center gap-4 border-b rounded border-b-white-3 px-4 py-4 bg-white-4">
+											<Avatar className="cursor-pointer">
+												{selectedUser?.image?.public_id ? (
+													<AvatarImage src={selectedUser?.image.url} />
+												) : (
+													<AvatarImage src="/images/Avatar.png" />
+												)}
+											</Avatar>
+
+											<h5 className="text-black-3 cursor-pointer">
+												{selectedUser?.name}
+											</h5>
+										</div>
+										<div className="flex-1 overflow-y-auto scrollbar-hide p-4 flex flex-col-reverse gap-4">
+											{chats?.map((chat) => (
+												<ChatBody chat={chat} key={chat._id} />
+											))}
+										</div>
 									</div>
 
 									<ChatInput />
