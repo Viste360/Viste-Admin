@@ -15,7 +15,7 @@ import { User } from "@/types/user.type";
 import { Chat } from "@/types/chat.type";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 
-const Chat = () => {
+const Chats = () => {
 	const [searchKeyword, setSearchKeyword] = useState<string>("");
 	const [selectedUser, setSelectedUser] = useState<User | null>(null);
 	const [chats, setChats] = useState<Chat[] | undefined>([]);
@@ -115,4 +115,4 @@ const Chat = () => {
 	);
 };
 
-export default AuthGuard(Chat);
+export default AuthGuard(Chats);
