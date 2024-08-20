@@ -43,6 +43,7 @@ const config = {
 				"1": "hsl(var(--white-1))",
 				"2": "hsl(var(--white-2))",
 				"3": "hsl(var(--white-3))",
+				"4": "hsl(var(--white-4))",
 			},
 			green: {
 				"1": "hsl(var(--green-1))",
@@ -59,6 +60,7 @@ const config = {
 				"1": "hsl(var(--violet-1))",
 			},
 			transparent: colors.transparent,
+			
 		}),
 		extend: {
 			keyframes: {

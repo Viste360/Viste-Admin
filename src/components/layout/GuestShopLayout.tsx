@@ -1,4 +1,3 @@
-import React, { KeyboardEvent, useState } from "react";
 import { SubNavigationItem } from "@/types/app.type";
 import DashboardHeader from "../DashboardHeader";
 import SubNavigation from "../SubNavigation";
@@ -21,7 +20,6 @@ const navItems: SubNavigationItem[] = [
 ];
 
 const GuestShopLayout: React.FC<GuestShopLayoutProps> = ({ children, type = "orders" }) => {
-
 	const exportOrders = () => {
 		console.log("Export");
 	};
@@ -36,7 +34,7 @@ const GuestShopLayout: React.FC<GuestShopLayoutProps> = ({ children, type = "ord
 				title="GuestShop Orders"
 				subTitle="Tagline will go here"
 				exp={type === "orders" ? true : false}
-				expCallback={exportOrders} 
+				expCallback={exportOrders}
 			/>
 			<SubNavigation navItems={navItems} />
 			{type === "orders" && <UtilsBar onSearch={searchOrder} />}
