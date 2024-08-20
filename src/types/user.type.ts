@@ -2,7 +2,10 @@ export interface User {
 	_id: string;
 	name: string;
 	email: string;
-	image?: string;
+	image?: {
+		public_id: string;
+		url: string;
+	};
 	approve: boolean;
 	verified: boolean;
 	resetPasswordToken: string;

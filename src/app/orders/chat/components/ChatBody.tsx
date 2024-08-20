@@ -1,11 +1,12 @@
+import { Chat } from "@/types/chat.type";
 import React from "react";
 
 interface ChatBodyProps {
-	item: number;
+	chat: Chat;
 }
 
-const ChatBody: React.FC<ChatBodyProps> = ({ item }) => {
-	return <div>body {item}</div>;
+const ChatBody: React.FC<ChatBodyProps> = ({ chat }) => {
+	return <div>body {chat.desc}</div>;
 };
 
 export default ChatBody;

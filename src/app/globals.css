@@ -24,7 +24,6 @@
 		--green-3: #ECFDF3;
 
 
-
 		--black-1: #000000;
 		--black-2: #101828;
 		--black-3: #344054;
@@ -131,6 +130,12 @@
 		font-weight: 500;
 	}
 
+	h5 {
+		font-size: 14px;
+		line-height: 20px;
+		font-weight: 500;
+	}
+
 	h6 {
 		font-size: 16px;
 		line-height: 24px;
@@ -141,5 +146,14 @@
 		font-size: 14px;
 		line-height: 20px;
 		font-weight: 400;
+	}
+
+	.scrollbar-hide::-webkit-scrollbar {
+		display: none;
+	}
+
+	.scrollbar-hide {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
 	}
 }

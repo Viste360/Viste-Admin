@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./slices/userSlice";
 import appReducer from "./slices/appSlice";
+import chatReducer from "./slices/chatSlice";
 
 export const makeStore = () => {
 	return configureStore({
 		reducer: {
 			userState: userReducer,
-			appState: appReducer
+			appState: appReducer,
+			chatState: chatReducer,
 		},
 	});
 };

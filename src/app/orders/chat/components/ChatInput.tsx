@@ -23,7 +23,7 @@ const ChatInput = () => {
 	};
 
 	return (
-		<div className="h-28 bg-white-3 rounded-t-[4rem] flex justify-between items-center px-8 gap-4">
+		<div className="h-24 bg-white-3 rounded-t-[4rem] flex justify-between items-center px-8 gap-4">
 			<Button className="text-red-3 rounded-full w-12 h-12 p-0">
 				<FaPlus size={32} />
 			</Button>
