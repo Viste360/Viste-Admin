@@ -9,7 +9,7 @@ type NavItemProps = NavigationItem & {
 
 const NavItem: React.FC<NavItemProps> = ({ label, route, icon: Icon, highlight = true }) => {
 	const pathname = usePathname();
-	const isActive = pathname.startsWith(route);
+	const isActive = route === "/" ? pathname === route : pathname.startsWith(route);
 
 	return (
 		<Link href={route}>

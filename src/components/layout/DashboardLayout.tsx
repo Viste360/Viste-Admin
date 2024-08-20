@@ -62,7 +62,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
 	const { user } = useAppSelector((state) => state.userState);
 	const dispatch = useAppDispatch();
 
-	const SearchHandler = (event: ChangeEvent<HTMLInputElement>): void => {
+	const onChangeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
 		setSearchKeyword(event.target.value);
 	};
 
@@ -90,9 +90,9 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
 						<SearchInput
 							value={searchKeyword}
 							placeholder="search"
-							onChange={SearchHandler}
+							onChange={onChangeHandler}
 							onKeyDown={handleKeyDown}
-							className="w-64 bg-red-5"
+							className="w-72 bg-red-5 focus-visible:border-red-5 border-red-5 placeholder:text-white-1"
 							icon="/images/Search.png"
 						/>
 					</div>
@@ -109,7 +109,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
 					</div>
 				</div>
 
-				<div className="flex flex-col gap-3 w-full px-4">
+				<div className="flex flex-col gap-3 px-4">
 					<div className="flex flex-col gap-2">
 						{" "}
 						{footerNavigation.map((item) => (

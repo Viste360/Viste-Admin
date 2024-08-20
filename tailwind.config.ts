@@ -17,7 +17,7 @@ const config = {
 				"2xl": "1400px",
 			},
 		},
-		colors: {
+		colors: ({ colors }) => ({
 			red: {
 				"1": "hsl(var(--red-1))",
 				"2": "hsl(var(--red-2))",
@@ -29,6 +29,7 @@ const config = {
 				"8": "hsl(var(--red-8))",
 				"9": "hsl(var(--red-9))",
 				"10": "hsl(var(--red-10))",
+				"11": "hsl(var(--red-11))",
 			},
 			black: {
 				"1": "hsl(var(--black-1))",
@@ -57,7 +58,8 @@ const config = {
 			violet: {
 				"1": "hsl(var(--violet-1))",
 			},
-		},
+			transparent: colors.transparent,
+		}),
 		extend: {
 			keyframes: {
 				"accordion-down": {

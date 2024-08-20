@@ -42,7 +42,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
 					value={value}
 					autoComplete="on"
 					className={cn(
-						"border-red-5 h-11 placeholder:text-white-1 placeholder:text-base placeholder:font-normal pl-9 focus-visible:outline-none focus-visible:ring-0 focus-visible:border-red-5",
+						"h-11 placeholder:text-base placeholder:font-normal pl-9 focus-visible:outline-none focus-visible:ring-0 transition-colors",
 						className
 					)}
 				/>

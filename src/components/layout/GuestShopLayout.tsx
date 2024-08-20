@@ -1,22 +1,15 @@
-import Image from "next/image";
-import React, { ChangeEvent, KeyboardEvent, ReactNode, useState } from "react";
-import SearchInput from "../SearchInput";
-import { LuLogOut } from "react-icons/lu";
+import React, { KeyboardEvent, useState } from "react";
 import { SubNavigationItem } from "@/types/app.type";
-import NavItem from "../NavItem";
-import { Avatar } from "../ui/avatar";
-import { Button } from "../ui/button";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { logoutAction } from "@/redux/actions/userAction";
-import Link from "next/link";
 import DashboardHeader from "../DashboardHeader";
+import SubNavigation from "../SubNavigation";
+import UtilsBar from "../UtilsBar";
 
 interface GuestShopLayoutProps {
-	children: ReactNode;
-	exp?: boolean;
+	children: React.ReactNode;
+	type?: "orders" | "chat";
 }
 
-const mainNavigation: SubNavigationItem[] = [
+const navItems: SubNavigationItem[] = [
 	{
 		label: "Orders",
 		route: "/orders",
@@ -27,20 +20,26 @@ const mainNavigation: SubNavigationItem[] = [
 	},
 ];
 
-const GuestShopLayout: React.FC<GuestShopLayoutProps> = ({ children, exp = true }) => {
+const GuestShopLayout: React.FC<GuestShopLayoutProps> = ({ children, type = "orders" }) => {
+
 	const exportOrders = () => {
 		console.log("Export");
 	};
 
+	const searchOrder = (keyword: string): void => {
+		console.log("search item: ", keyword);
+	};
+
 	return (
-		<div className="flex flex-col">
+		<div className="flex flex-col gap-3">
 			<DashboardHeader
 				title="GuestShop Orders"
 				subTitle="Tagline will go here"
-				exp={exp}
-				expCallback={exportOrders}
+				exp={type === "orders" ? true : false}
+				expCallback={exportOrders} 
 			/>
-			<div className=""></div>
+			<SubNavigation navItems={navItems} />
+			{type === "orders" && <UtilsBar onSearch={searchOrder} />}
 			<div className="bg-white-1 flex-1">{children}</div>
 		</div>
 	);
