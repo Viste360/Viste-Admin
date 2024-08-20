@@ -41,12 +41,26 @@ const ChatItem: React.FC<ChatItemProps> = ({ user, selectedUser, selectChat, las
 					</Avatar>
 					<div className="absolute right-0 bottom-0 w-2 h-2 rounded-full bg-green-2 ring-[2px] ring-white-1"></div>
 				</div>
-				<div className="flex h-full justify-between flex-1">
+				<div className="flex h-full justify-between flex-1 gap-2">
 					<div className="flex flex-col justify-center">
-						<h5 className={cn(isSelected ? "text-red-3" : "text-black-3")}>{user.name}</h5>
-						<p className={cn(isSelected ? "text-red-4" : "text-black-4")}>{user.email}</p>
+						<h5 className={cn(isSelected ? "text-red-3" : "text-black-3")}>
+							{user.name}
+						</h5>
+						<p
+							className={cn(
+								isSelected ? "text-red-4" : "text-black-4",
+								"line-clamp-1 overflow-hidden text-ellipsis"
+							)}
+						>
+							{user.email}
+						</p>
 					</div>
-					<p className={cn(isSelected ? "text-red-4" : "text-black-4")}>
+					<p
+						className={cn(
+							isSelected ? "text-red-4" : "text-black-4",
+							"line-clamp-2 overflow-hidden text-ellipsis"
+						)}
+					>
 						{lastChat &&
 							formatDistanceToNow(new Date(lastChat?.createdAt), {
 								addSuffix: true,
@@ -56,7 +70,8 @@ const ChatItem: React.FC<ChatItemProps> = ({ user, selectedUser, selectChat, las
 			</div>
 			<p
 				className={cn(
-					isSelected ? "text-red-4" : "text-black-4" < "line-clamp-2 overflow-hidden text-ellipsis"
+					isSelected ? "text-red-4" : "text-black-4",
+					"line-clamp-2 overflow-hidden text-ellipsis"
 				)}
 			>
 				{lastChat?.desc}
