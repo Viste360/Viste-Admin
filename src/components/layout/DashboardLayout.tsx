@@ -85,7 +85,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
 							src={"/images/VisteAdmin.png"}
 							alt="viste-admin-logo"
 							width={120}
-							height={300}
+							height={27}
 						/>
 						<SearchInput
 							value={searchKeyword}

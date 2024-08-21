@@ -15,6 +15,10 @@ interface ChatItemProps {
 const ChatItem: React.FC<ChatItemProps> = ({ user, selectedUser, selectChat, lastChat }) => {
 	const isSelected: boolean = selectedUser?._id === user._id;
 
+	const capitalizeFirstLetter = (text: string) => {
+		return text.charAt(0).toUpperCase() + text.slice(1);
+	};
+
 	return (
 		<div
 			className={cn(
@@ -67,9 +71,11 @@ const ChatItem: React.FC<ChatItemProps> = ({ user, selectedUser, selectChat, las
 						)}
 					>
 						{lastChat &&
-							formatDistanceToNow(new Date(lastChat?.createdAt), {
-								addSuffix: true,
-							})}
+							capitalizeFirstLetter(
+								formatDistanceToNow(new Date(lastChat?.createdAt), {
+									addSuffix: true,
+								})
+							)}
 					</p>
 				</div>
 			</div>
