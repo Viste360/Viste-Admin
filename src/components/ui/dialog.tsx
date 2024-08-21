@@ -72,6 +72,7 @@ const CustomDialogContent = React.forwardRef<
 	</DialogPortal>
 ));
 DialogContent.displayName = DialogPrimitive.Content.displayName;
+CustomDialogContent.displayName = "Custom" + DialogPrimitive.Content.displayName;
 
 const DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
 	<div
@@ -120,7 +121,7 @@ export {
 	DialogClose,
 	DialogTrigger,
 	DialogContent,
-  CustomDialogContent,
+	CustomDialogContent,
 	DialogHeader,
 	DialogFooter,
 	DialogTitle,
