@@ -14,25 +14,40 @@ import { Spinner } from "@/components/ui/spinner";
 import { User } from "@/types/user.type";
 import { Chat } from "@/types/chat.type";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { clearNewChat } from "@/redux/slices/chatSlice";
 
 const Chats = () => {
 	const [searchKeyword, setSearchKeyword] = useState<string>("");
 	const [selectedUser, setSelectedUser] = useState<User | null>(null);
 	const [chats, setChats] = useState<Chat[] | undefined>([]);
-	const { isLoading, usersChats } = useAppSelector((state) => state.chatState);
+	const { isLoading, usersChats, newMessageStatus, newChat } = useAppSelector(
+		(state) => state.chatState
+	);
 	const dispatch = useAppDispatch();
 
 	const onChangeHandler = (event: ChangeEvent<HTMLInputElement>): void => {
+		if (event.target.value === "") {
+			dispatch(getUsersChatsAction());
+		}
+
 		setSearchKeyword(event.target.value);
 	};
 
 	const searchChatHandler = (event: KeyboardEvent<HTMLInputElement>): void => {
 		if (event.key === "Enter") {
-			setSearchKeyword("");
+			dispatch(getUsersChatsAction(searchKeyword));
 			setSelectedUser(null);
 			setChats([]);
 		}
 	};
+
+	useEffect(() => {
+		if (newMessageStatus === "Success" && chats && newChat) {
+			setChats([newChat, ...chats]);
+
+			dispatch(clearNewChat());
+		}
+	}, [newChat, newMessageStatus, chats]);
 
 	const selectChat = (user: User) => {
 		const userChats = usersChats.find((item) => item.user._id === user._id);
@@ -104,7 +119,7 @@ const Chats = () => {
 										</div>
 									</div>
 
-									<ChatInput />
+									<ChatInput userId={selectedUser._id} />
 								</>
 							)}
 						</div>

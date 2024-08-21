@@ -1,21 +1,30 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit/react";
-import { UserChat } from "@/types/chat.type";
-import { getUsersChatsAction } from "../actions/chatAction";
+import { Chat, ChatWithUser, UserChat } from "@/types/chat.type";
+import { getUsersChatsAction, sendMessageAction } from "../actions/chatAction";
 
 type ChatState = {
 	isLoading: boolean;
 	usersChats: UserChat[];
+	newMessageStatus: null | "Sending" | "Failed" | "Success";
+	newChat?: null | Chat;
 };
 
 const initialState: ChatState = {
 	isLoading: true,
 	usersChats: [],
+	newMessageStatus: null,
+	newChat: null,
 };
 
 export const chatSlice = createSlice({
 	name: "chat",
 	initialState,
-	reducers: {},
+	reducers: {
+		clearNewChat: (state) => {
+			state.newMessageStatus = null;
+			state.newChat = null;
+		}
+	},
 	extraReducers: (builders) => {
 		// get users chats
 		builders.addCase(getUsersChatsAction.pending, (state) => {
@@ -31,9 +40,43 @@ export const chatSlice = createSlice({
 		builders.addCase(getUsersChatsAction.rejected, (state) => {
 			state.isLoading = false;
 		});
+
+		// send new message
+		builders.addCase(sendMessageAction.pending, (state) => {
+			state.newMessageStatus = "Sending";
+		});
+		builders.addCase(
+			sendMessageAction.fulfilled,
+			(state, action: PayloadAction<ChatWithUser>) => {
+				state.newMessageStatus = "Success";
+				const newChat = action.payload;
+
+				const userIndex = state.usersChats.findIndex(
+					(item) => item.user._id === newChat.user._id
+				);
+				if (userIndex !== -1) {
+					state.usersChats[userIndex].chats.unshift({ ...newChat, user: newChat.user._id });
+				} else {
+					state.usersChats.unshift({
+						user: newChat.user,
+						chats: [
+							{
+								...newChat,
+								user: newChat.user._id,
+							},
+						],
+					});
+				}
+
+				state.newChat = { ...newChat, user: newChat.user._id };
+			}
+		);
+		builders.addCase(sendMessageAction.rejected, (state) => {
+			state.newMessageStatus = "Failed";
+		});
 	},
 });
 
-export const {} = chatSlice.actions;
+export const { clearNewChat } = chatSlice.actions;
 
 export default chatSlice.reducer;

@@ -29,3 +29,11 @@ export type UserChat = {
 	user: User;
 	chats: Chat[];
 };
+
+export type NewChat = {
+	desc: string;
+};
+
+export type ChatWithUser = Chat & {
+	user: User;
+};

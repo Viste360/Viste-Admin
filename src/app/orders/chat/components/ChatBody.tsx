@@ -48,7 +48,7 @@ const ChatBody: React.FC<ChatBodyProps> = ({ chat }) => {
 						</Button>
 					)}
 					<p className="text-black-4 text-xs">
-						{formatRelative(subDays(new Date(chat.createdAt), 0), new Date())}
+						{chat.createdAt && formatRelative(subDays(new Date(chat?.createdAt), 0), new Date())}
 					</p>
 				</div>
 			</div>

@@ -7,7 +7,7 @@ import {
 	signUpAction,
 	verifyEmailAction,
 } from "../actions/userAction";
-import { getUsersChatsAction } from "../actions/chatAction";
+import { getUsersChatsAction, sendMessageAction } from "../actions/chatAction";
 
 type initialState = {
 	error?: string | null;
@@ -95,6 +95,11 @@ export const appSlice = createSlice({
 
 		// get users chats
 		builders.addCase(getUsersChatsAction.rejected, (state, action) => {
+			state.error = action.payload;
+		});
+
+		// send new message
+		builders.addCase(sendMessageAction.rejected, (state, action) => {
 			state.error = action.payload;
 		});
 	},

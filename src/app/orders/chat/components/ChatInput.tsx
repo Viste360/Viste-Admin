@@ -4,9 +4,13 @@ import { IoMdMic } from "react-icons/io";
 import { FaPlus } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { sendMessageAction } from "@/redux/actions/chatAction";
 
-const ChatInput = () => {
+const ChatInput: React.FC<{ userId: string }> = ({ userId }) => {
 	const [keyword, setKeyword] = useState<string>("");
+	const { newMessageStatus } = useAppSelector((state) => state.chatState);
+	const dispatch = useAppDispatch();
 
 	const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
 		setKeyword(event.target.value);
@@ -14,17 +18,26 @@ const ChatInput = () => {
 
 	const keydownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
 		if (event.key === "Enter") {
-			setKeyword("");
+			if (keyword.length > 0) {
+				dispatch(sendMessageAction({ payload: { desc: keyword }, userId }));
+				setKeyword("");
+			}
 		}
 	};
 
 	const submitHandler = () => {
-		setKeyword("");
+		if (keyword.length > 0) {
+			dispatch(sendMessageAction({ payload: { desc: keyword }, userId }));
+			setKeyword("");
+		}
 	};
 
 	return (
 		<div className="h-24 bg-white-3 rounded-t-[4rem] flex justify-between items-center px-8 gap-4">
-			<Button className="text-red-3 rounded-full w-12 h-12 p-0">
+			<Button
+				disabled={newMessageStatus === "Sending"}
+				className="text-red-3 rounded-full w-12 h-12 p-0"
+			>
 				<FaPlus size={30} />
 			</Button>
 			<Input
@@ -34,11 +47,15 @@ const ChatInput = () => {
 				onChange={changeHandler}
 				onKeyDown={keydownHandler}
 			/>
-			<Button className="text-red-3 rounded-full w-12 h-12 p-0 bg-white-1">
+			<Button
+				disabled={newMessageStatus === "Sending"}
+				className="text-red-3 rounded-full w-12 h-12 p-0 bg-white-1"
+			>
 				<IoMdMic size={30} />
 			</Button>
 			<Button
 				onClick={submitHandler}
+				disabled={newMessageStatus === "Sending"}
 				className="rounded-full w-12 h-12 p-0 bg-red-3 text-white-1"
 			>
 				<LuSendHorizonal size={30} />
