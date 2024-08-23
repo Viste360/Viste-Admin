@@ -23,7 +23,7 @@ export const chatSlice = createSlice({
 		clearNewChat: (state) => {
 			state.newMessageStatus = null;
 			state.newChat = null;
-		}
+		},
 	},
 	extraReducers: (builders) => {
 		// get users chats
@@ -49,13 +49,19 @@ export const chatSlice = createSlice({
 			sendMessageAction.fulfilled,
 			(state, action: PayloadAction<ChatWithUser>) => {
 				state.newMessageStatus = "Success";
-				const newChat = action.payload;
 
+				const newChat = action.payload;
 				const userIndex = state.usersChats.findIndex(
 					(item) => item.user._id === newChat.user._id
 				);
 				if (userIndex !== -1) {
-					state.usersChats[userIndex].chats.unshift({ ...newChat, user: newChat.user._id });
+					state.usersChats[userIndex].chats.unshift({
+						...newChat,
+						user: newChat.user._id,
+					});
+
+					const updatedUser = state.usersChats.splice(userIndex, 1)[0];
+					state.usersChats.unshift(updatedUser);
 				} else {
 					state.usersChats.unshift({
 						user: newChat.user,
@@ -69,6 +75,7 @@ export const chatSlice = createSlice({
 				}
 
 				state.newChat = { ...newChat, user: newChat.user._id };
+
 			}
 		);
 		builders.addCase(sendMessageAction.rejected, (state) => {
