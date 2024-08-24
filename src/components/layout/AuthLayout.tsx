@@ -36,7 +36,18 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
 				</div>
 				<p className="text-violet-1 opacity-70">© All copyright resereved 2024</p>
 			</div>
-			<div className="w-full lg:w-1/2">{children}</div>
+			<div className="w-full lg:w-1/2 bg-red-3 lg:bg-inherit flex flex-col justify-center lg:block">
+				<div className="flex justify-center items-center lg:hidden mt-32 -mb-10">
+					<Image
+						className="w-60 h-16"
+						src={"/images/VisteAdminMobile.png"}
+						alt="viste-admin-logo"
+						width={180}
+						height={450}
+					/>
+				</div>
+				{children}
+			</div>
 		</div>
 	);
 };

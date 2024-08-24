@@ -32,7 +32,7 @@ const FormInput: React.FC<FormInputProps> = ({
 }) => {
 	return (
 		<div className="flex flex-col space-y-1">
-			<Label htmlFor={name} className={"text-black-3"}>
+			<Label htmlFor={name} className={" text-white-1 lg:text-black-3"}>
 				{label}
 			</Label>
 			<Input
@@ -46,7 +46,7 @@ const FormInput: React.FC<FormInputProps> = ({
 				value={value}
 				autoComplete="on"
 			/>
-			<div className="text-xs text-red-3 min-h-4">{isError ? error : ""}</div>
+			<div className="text-xs text-white-2 lg:text-red-3 min-h-4">{isError ? error : ""}</div>
 		</div>
 	);
 };

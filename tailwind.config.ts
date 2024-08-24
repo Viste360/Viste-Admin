@@ -61,7 +61,7 @@ const config = {
 				"1": "hsl(var(--violet-1))",
 			},
 			transparent: colors.transparent,
-			
+			inherit: colors.inherit,
 		}),
 		extend: {
 			keyframes: {

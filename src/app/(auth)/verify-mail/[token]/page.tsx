@@ -22,13 +22,17 @@ const VerifyEmail = () => {
 
 	return (
 		<AuthLayout>
-			<main className="flex items-center justify-center h-screen">
+			<main className="flex items-center justify-center h-screen flex-1 lg:flex-none">
 				<div className="flex flex-col items-center w-full gap-6">
 					{verifying ? (
-						<h2>Verifying Email...</h2>
+						<h2 className="text-white-1 lg:text-black-1 ">Verifying Email...</h2>
 					) : (
 						<>
-							<h2 className={verified ? "text-green-2" : "text-red-3"}>
+							<h2
+								className={
+									verified ? "text-green-2" : "text-white-1 lg:text-red-3 "
+								}
+							>
 								{verified ? "Email Verified" : "Verification Failed"}
 							</h2>
 							<Button
