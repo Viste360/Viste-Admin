@@ -4,7 +4,7 @@ import SearchInput from "@/components/SearchInput";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import GuestShopLayout from "@/components/layout/GuestShopLayout";
 import AuthGuard from "@/hoc/AuthGuard";
-import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
 import ChatInput from "./components/ChatInput";
 import ChatBody from "./components/ChatBody";
 import ChatItem from "./components/ChatItem";
@@ -20,6 +20,7 @@ const Chats = () => {
 	const [searchKeyword, setSearchKeyword] = useState<string>("");
 	const [selectedUser, setSelectedUser] = useState<User | null>(null);
 	const [chats, setChats] = useState<Chat[] | undefined>([]);
+	const bodyContainer = useRef<HTMLDivElement>(null);
 	const { isLoading, usersChats, newMessageStatus, newChat } = useAppSelector(
 		(state) => state.chatState
 	);
@@ -41,6 +42,19 @@ const Chats = () => {
 		}
 	};
 
+	const selectChat = (user: User) => {
+		const userChats = usersChats.find((item) => item.user._id === user._id);
+
+		setSelectedUser(user);
+		setChats(userChats?.chats);
+	};
+
+	useEffect(() => {
+		if (bodyContainer.current) {
+			bodyContainer.current.scrollTop = bodyContainer.current.scrollHeight;
+		}
+	}, [chats]);
+
 	useEffect(() => {
 		if (newMessageStatus === "Success" && chats && newChat) {
 			setChats([newChat, ...chats]);
@@ -48,13 +62,6 @@ const Chats = () => {
 			dispatch(clearNewChat());
 		}
 	}, [newChat, newMessageStatus, chats]);
-
-	const selectChat = (user: User) => {
-		const userChats = usersChats.find((item) => item.user._id === user._id);
-
-		setSelectedUser(user);
-		setChats(userChats?.chats);
-	};
 
 	useEffect(() => {
 		dispatch(getUsersChatsAction());
@@ -112,7 +119,10 @@ const Chats = () => {
 												{selectedUser?.name}
 											</h5>
 										</div>
-										<div className="flex-1 overflow-y-auto scrollbar-hide p-4 flex flex-col-reverse gap-4">
+										<div
+											ref={bodyContainer}
+											className="flex-1 overflow-y-auto scrollbar-hide p-4 flex flex-col-reverse gap-4 scroll-smooth"
+										>
 											{chats?.map((chat) => (
 												<ChatBody chat={chat} key={chat._id} />
 											))}
