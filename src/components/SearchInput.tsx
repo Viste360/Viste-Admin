@@ -23,7 +23,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
 	icon,
 }) => {
 	return (
-		<div className="flex flex-col space-y-1">
+		<div className="flex flex-col space-y-1 w-full">
 			<div className="relative">
 				<div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 					<Image

@@ -7,7 +7,7 @@ export const getUsersChatsAction = createAsyncThunk<
 	UserChat[],
 	string | undefined,
 	{ rejectValue: string }
->("chat/usersChats", async ( keyword , thunkApi) => {
+>("chat/usersChats", async (keyword, thunkApi) => {
 	try {
 		const { data } = await getUsersChatsApi(keyword);
 

@@ -78,7 +78,7 @@ const Chats = () => {
 				) : (
 					<main className="flex gap-4">
 						<div
-							className={`xl:w-80 lg:w-72 flex flex-col items-center gap-4 ${
+							className={`xl:w-80 lg:w-72 w-full flex-col items-center  gap-4 ${
 								selectedUser ? "hidden lg:flex" : "flex"
 							}`}
 						>
@@ -88,7 +88,7 @@ const Chats = () => {
 								onKeyDown={searchChatHandler}
 								onChange={onChangeHandler}
 								icon="/images/SearchBlack.png"
-								className="xl:w-64 lg:w-60 focus-visible:border-black-4 border-black-5 rounded-lg placeholder:text-black-4"
+								className="xl:w-64 lg:w-60 w-full focus-visible:border-black-4 border-black-5 rounded-lg placeholder:text-black-4"
 							/>
 							<div className="border-white-3 w-full border-t-2" />
 							<div className="lg:h-[68.1vh] h-[64.7vh] overflow-y-auto scrollbar-hide w-full">
