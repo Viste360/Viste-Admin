@@ -15,6 +15,7 @@ import { User } from "@/types/user.type";
 import { Chat } from "@/types/chat.type";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { clearNewChat } from "@/redux/slices/chatSlice";
+import { MdOutlineArrowBackIos } from "react-icons/md";
 
 const Chats = () => {
 	const [searchKeyword, setSearchKeyword] = useState<string>("");
@@ -76,17 +77,21 @@ const Chats = () => {
 					</div>
 				) : (
 					<main className="flex gap-4">
-						<div className="w-80 flex flex-col items-center gap-4">
+						<div
+							className={`xl:w-80 lg:w-72 flex flex-col items-center gap-4 ${
+								selectedUser ? "hidden lg:flex" : "flex"
+							}`}
+						>
 							<SearchInput
 								value={searchKeyword}
 								placeholder="Search"
 								onKeyDown={searchChatHandler}
 								onChange={onChangeHandler}
 								icon="/images/SearchBlack.png"
-								className="w-64 focus-visible:border-black-4 border-black-5 rounded-lg placeholder:text-black-4"
+								className="xl:w-64 lg:w-60 focus-visible:border-black-4 border-black-5 rounded-lg placeholder:text-black-4"
 							/>
 							<div className="border-white-3 w-full border-t-2" />
-							<div className="h-[68.1vh] overflow-y-auto scrollbar-hide w-full">
+							<div className="lg:h-[68.1vh] h-[64.7vh] overflow-y-auto scrollbar-hide w-full">
 								{usersChats.map((item) => (
 									<ChatItem
 										user={item.user}
@@ -98,16 +103,28 @@ const Chats = () => {
 								))}
 							</div>
 						</div>
-						<div className="flex-1 bg-white-4 rounded flex flex-col">
+
+						<div
+							className={`flex-1 bg-white-4 rounded lg:flex flex-col ${
+								selectedUser ? "flex" : "hidden lg:flex"
+							}`}
+						>
 							{!selectedUser ? (
-								<div className="h-[76.3vh] flex items-center justify-center">
+								<div className="lg:h-[76.3vh] flex items-center justify-center">
 									<h4>Select a Chat</h4>
 								</div>
 							) : (
 								<>
-									<div className="h-[66.1vh] flex flex-col">
-										<div className="flex items-center gap-4 border-b rounded border-b-white-3 px-4 py-4 bg-white-4">
-											<Avatar className="cursor-pointer">
+									<div className="lg:h-[66.1vh] h-[62.85vh] flex flex-col">
+										<div className="flex items-center border-b rounded border-b-white-3 px-2 lg:px-4 py-4 bg-white-4">
+											<button
+												className="lg:hidden flex items-center justify-center p-2 rounded-full"
+												onClick={() => setSelectedUser(null)}
+											>
+												<MdOutlineArrowBackIos size={24} />
+											</button>
+
+											<Avatar className="cursor-pointer mr-4">
 												{selectedUser?.image?.public_id ? (
 													<AvatarImage src={selectedUser?.image.url} />
 												) : (
@@ -119,9 +136,10 @@ const Chats = () => {
 												{selectedUser?.name}
 											</h5>
 										</div>
+
 										<div
 											ref={bodyContainer}
-											className="flex-1 overflow-y-auto scrollbar-hide p-4 flex flex-col-reverse gap-4 scroll-smooth"
+											className="flex-1 overflow-y-auto scrollbar-hide p-4 flex flex-col-reverse gap-4 scroll-smooth min-w-full"
 										>
 											{chats?.map((chat) => (
 												<ChatBody chat={chat} key={chat._id} />

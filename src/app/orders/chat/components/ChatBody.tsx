@@ -20,7 +20,7 @@ const ChatBody: React.FC<ChatBodyProps> = ({ chat }) => {
 		<div
 			className={cn(
 				chat.sender === "admin" ? "self-end" : "self-start",
-				"flex items-center w-5/12"
+				"flex items-center w-11/12 sm:w-10/12 md:w-8/12 lg:w-9/12 xl:w-5/12"
 			)}
 		>
 			<div
@@ -28,36 +28,38 @@ const ChatBody: React.FC<ChatBodyProps> = ({ chat }) => {
 					chat.sender === "admin"
 						? "bg-white-5/60 rounded-xl rounded-tr-none"
 						: "bg-white-1 rounded-lg",
-					"flex-1 p-3 shadow-sm flex justify-between items-center h-full"
+					"w-full p-3 shadow-sm flex flex-col justify-between gap-2"
 				)}
 			>
-				<h4
-					className={cn(
-						chat.sender === "admin" ? "text-dark-1" : "text-black-3",
-						"flex-1"
-					)}
-				>
-					{chat.desc}
-				</h4>
-				<div className="flex flex-col justify-between items-end gap-4 h-full">
-					{chat.sender === "admin" ? (
-						<div className="w-8 h-8"></div>
-					) : (
-						<Button className="rounded-full w-8 h-8 p-0">
-							{true ? (
-								<FaRegStar size={25} className="text-black-5" />
-							) : (
-								<FaStar className="text-red-3" size={25} />
-							)}
-						</Button>
-					)}
-					<p className="text-black-4 text-xs">
-						{chat.createdAt &&
-							capitalizeFirstLetter(
-								formatRelative(subDays(new Date(chat?.createdAt), 0), new Date())
-							)}
-					</p>
+				<div className="flex justify-between w-full break-words">
+					<h4
+						className={cn(
+							chat.sender === "admin" ? "text-dark-1" : "text-black-3",
+							"flex-1 break-all"
+						)}
+					>
+						{chat.desc}
+					</h4>
+					<div className="flex justify-end">
+						{chat.sender === "admin" ? (
+							<div className="w-8 h-8"></div>
+						) : (
+							<Button className="rounded-full w-8 h-8 p-0">
+								{true ? (
+									<FaRegStar size={25} className="text-black-5" />
+								) : (
+									<FaStar className="text-red-3" size={25} />
+								)}
+							</Button>
+						)}
+					</div>
 				</div>
+				<p className="text-black-4 text-xs self-end">
+					{chat.createdAt &&
+						capitalizeFirstLetter(
+							formatRelative(subDays(new Date(chat?.createdAt), 0), new Date())
+						)}
+				</p>
 			</div>
 			<Button className="rounded-full w-8 h-8 p-0 text-black-4">
 				<BsThreeDotsVertical size={25} />

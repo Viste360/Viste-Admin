@@ -10,7 +10,7 @@ import { Button } from "../ui/button";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { logoutAction } from "@/redux/actions/userAction";
 import Link from "next/link";
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
+import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
 
 interface DashboardLayoutProps {
 	children: ReactNode;
@@ -79,7 +79,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
 
 	return (
 		<div className="flex flex-col lg:flex-row h-screen bg-red-3">
-			<div className="flex items-center lg:hidden h-16 relative">
+			<div className="flex items-center lg:hidden h-16 min-h-16 relative">
 				<Sheet>
 					<SheetTrigger className="lg:hidden absolute left-5 text-white-1">
 						<LuMenu size={30} />
@@ -97,7 +97,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
 										/>
 										<SearchInput
 											value={searchKeyword}
-											placeholder="search"
+											placeholder="Search"
 											onChange={onChangeHandler}
 											onKeyDown={handleKeyDown}
 											className="w-64 md:w-72 bg-red-5 focus-visible:border-red-5 border-red-5 placeholder:text-white-1"
@@ -108,12 +108,13 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
 								<div className="w-full flex flex-col gap-2">
 									{" "}
 									{mainNavigation.map((item) => (
-										<NavItem
-											label={item.label}
-											route={item.route}
-											icon={item.icon}
-											key={item.route}
-										/>
+										<SheetClose key={item.route} asChild>
+											<NavItem
+												label={item.label}
+												route={item.route}
+												icon={item.icon}
+											/>
+										</SheetClose>
 									))}
 								</div>
 							</div>
@@ -122,33 +123,40 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
 								<div className="flex flex-col gap-2">
 									{" "}
 									{footerNavigation.map((item) => (
-										<NavItem
-											label={item.label}
-											route={item.route}
-											icon={item.icon}
-											key={item.route}
-										/>
+										<SheetClose key={item.route} asChild>
+											<NavItem
+												label={item.label}
+												route={item.route}
+												icon={item.icon}
+											/>
+										</SheetClose>
 									))}
 								</div>
 
 								<hr className="text-red-5" />
 								<div className="flex justify-between p-2">
 									<div className="flex items-center gap-3 w-full">
-										<Link href="/profile">
-											<Avatar className="w-11 h-11">
-												<Image
-													fill
-													src={"/images/Profile.png"}
-													alt="viste-admin"
-												/>
-											</Avatar>
-										</Link>
+										<SheetClose asChild>
+											<Link href="/profile">
+												<Avatar className="w-11 h-11">
+													<Image
+														fill
+														src={"/images/Profile.png"}
+														alt="viste-admin"
+													/>
+												</Avatar>
+											</Link>
+										</SheetClose>
 
 										<div className="flex flex-col justify-center">
-											<Link href="/profile" className="font-medium">
-												{user?.name}
-											</Link>
-											<h5 className="text-red-7 md:w-full w-28 break-words">{user?.email}</h5>
+											<SheetClose asChild>
+												<Link href="/profile" className="font-medium">
+													{user?.name}
+												</Link>
+											</SheetClose>
+											<h5 className="text-red-7 md:w-full w-28 break-words">
+												{user?.email}
+											</h5>
 										</div>
 									</div>
 									<Button className="text-red-10 px-2" onClick={LogoutHandler}>
@@ -236,7 +244,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
 					</div>
 				</div>
 			</div>
-			<div className="bg-white-1 flex-1 lg:rounded-tl-[32px] lg:mt-8 p-8">{children}</div>
+			<div className="bg-white-1 flex-1 lg:rounded-tl-[32px] lg:mt-8 px-2 sm:px-4 lg:px-8 pt-8">{children}</div>
 		</div>
 	);
 };
