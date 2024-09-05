@@ -5,22 +5,10 @@ export interface Chat {
 	desc: string;
 	sender: "user" | "admin";
 	user: string;
-	image?: {
-		public_id: string;
-		url: string;
-	};
+	image?: Image;
 	metaData?: object;
-	coOrdinates?: [
-		{
-			lat: string;
-			lon: string;
-		}
-	];
-	file?: {
-		public_id: string;
-		url: string;
-		name: string;
-	};
+	coOrdinates?: CoOrdinate[];
+	file?: File;
 	createdAt: Date;
 	updatedAt: Date;
 }
@@ -36,4 +24,20 @@ export type NewChat = {
 
 export type ChatWithUser = Chat & {
 	user: User;
+};
+
+export type Image = {
+	public_id: string;
+	url: string;
+};
+
+export type CoOrdinate = {
+	lat: string;
+	lon: string;
+};
+
+export type File = {
+	public_id: string;
+	url: string;
+	name: string;
 };

@@ -2,19 +2,35 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Chat } from "@/types/chat.type";
 import { formatRelative, subDays } from "date-fns";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { FaRegStar } from "react-icons/fa";
 import { FaStar } from "react-icons/fa6";
+import LinkPreview from "./LinkPreview";
+import ChatImage from "./ChatImage";
+import ChatFile from "./ChatFile";
+import ChatMap from "./ChatMap";
+import Linkify from "linkify-react";
 
 interface ChatBodyProps {
 	chat: Chat;
 }
 
 const ChatBody: React.FC<ChatBodyProps> = ({ chat }) => {
+	const [urls, setUrls] = useState<string[]>([]);
+
 	const capitalizeFirstLetter = (text: string) => {
 		return text.charAt(0).toUpperCase() + text.slice(1);
 	};
+
+	useEffect(() => {
+		const urlPattern =
+			/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|shorts\/|embed\/)|youtu\.be\/|facebook\.com\/|m\.facebook\.com\/|twitter\.com\/|instagram\.com\/|linkedin\.com\/|t\.co\/|[^ \n\r]+?\.[a-z]{2,})(?:[^\s]*)/gi;
+
+		const matchedUrls = chat.desc.match(urlPattern) || [];
+
+		setUrls(matchedUrls);
+	}, [chat]);
 
 	return (
 		<div
@@ -32,14 +48,33 @@ const ChatBody: React.FC<ChatBodyProps> = ({ chat }) => {
 				)}
 			>
 				<div className="flex justify-between w-full break-words">
-					<h4
+					<div
 						className={cn(
 							chat.sender === "admin" ? "text-dark-1" : "text-black-3",
 							"flex-1 break-all"
 						)}
 					>
-						{chat.desc}
-					</h4>
+						<Linkify
+							as="h4"
+							options={{
+								defaultProtocol: "https",
+								className: "link-url",
+								nl2br: true,
+							}}
+						>
+							{chat.desc}
+						</Linkify>
+
+						{urls.map((url, i) => {
+							return <LinkPreview key={i} url={url} type={chat.sender} />;
+						})}
+
+						{chat.image?.url && <ChatImage image={chat.image} />}
+						{chat.file?.url && <ChatFile file={chat.file} />}
+						{chat.coOrdinates && chat.coOrdinates.length > 0 && (
+							<ChatMap coOrdinates={chat.coOrdinates} />
+						)}
+					</div>
 					<div className="flex justify-end">
 						{chat.sender === "admin" ? (
 							<div className="w-8 h-8"></div>

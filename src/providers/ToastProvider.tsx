@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { clearError, clearSuccess } from "@/redux/slices/appSlice";
 import { FC, PropsWithChildren, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const ToastProvider: FC<PropsWithChildren> = ({ children }) => {
 	const { error, success } = useAppSelector((state) => state.appState);

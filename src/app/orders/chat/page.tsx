@@ -4,7 +4,7 @@ import SearchInput from "@/components/SearchInput";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import GuestShopLayout from "@/components/layout/GuestShopLayout";
 import AuthGuard from "@/hoc/AuthGuard";
-import React, { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
+import React, { ChangeEvent, KeyboardEvent, useCallback, useEffect, useRef, useState } from "react";
 import ChatInput from "./components/ChatInput";
 import ChatBody from "./components/ChatBody";
 import ChatItem from "./components/ChatItem";

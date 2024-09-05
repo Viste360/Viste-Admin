@@ -1,3 +1,5 @@
+@import "~react-toastify/dist/ReactToastify.min.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -163,5 +165,11 @@
 	.scrollbar-hide {
 		-ms-overflow-style: none;
 		scrollbar-width: none;
+	}
+
+	.link-url {
+		text-decoration: underline;
+		color: hsl(var(--blue-1));
+		font-weight: 500;
 	}
 }
