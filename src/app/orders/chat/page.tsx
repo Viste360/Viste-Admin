@@ -4,7 +4,7 @@ import SearchInput from "@/components/SearchInput";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import GuestShopLayout from "@/components/layout/GuestShopLayout";
 import AuthGuard from "@/hoc/AuthGuard";
-import React, { ChangeEvent, KeyboardEvent, useCallback, useEffect, useRef, useState } from "react";
+import React, { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from "react";
 import ChatInput from "./components/ChatInput";
 import ChatBody from "./components/ChatBody";
 import ChatItem from "./components/ChatItem";
@@ -50,9 +50,24 @@ const Chats = () => {
 		setChats(userChats?.chats);
 	};
 
+	const scrollToBottom = () => {
+		requestAnimationFrame(() => {
+			if (bodyContainer.current) {
+				bodyContainer.current.scrollTop = bodyContainer.current.scrollHeight;
+			}
+		});
+	};
+
 	useEffect(() => {
+		const observer = new MutationObserver(() => {
+			scrollToBottom();
+		});
+
 		if (bodyContainer.current) {
-			bodyContainer.current.scrollTop = bodyContainer.current.scrollHeight;
+			observer.observe(bodyContainer.current, {
+				childList: true,
+				subtree: true,
+			});
 		}
 	}, [chats]);
 

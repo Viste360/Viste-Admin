@@ -46,7 +46,7 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({ url, type }) => {
 	}
 
 	return (
-		<div className="rounded-md p-4 mt-2 flex items-center">
+		<div className="rounded-md p-2 mt-2 flex items-center">
 			{isYouTube && videoId ? (
 				<div className="w-full aspect-video relative overflow-hidden rounded-lg">
 					<iframe
