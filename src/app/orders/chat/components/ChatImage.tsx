@@ -8,7 +8,7 @@ interface ChatImageProps {
 const ChatImage: React.FC<ChatImageProps> = ({ image }) => {
 	return (
 		<div className="my-3">
-			<img src={image?.url} alt={image?.public_id} height={300} width={200} />
+			<img src={image?.url} alt={image?.public_id} className="w-full h-auto"  />
 		</div>
 	);
 };

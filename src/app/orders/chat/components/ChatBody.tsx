@@ -51,7 +51,7 @@ const ChatBody: React.FC<ChatBodyProps> = ({ chat }) => {
 					<div
 						className={cn(
 							chat.sender === "admin" ? "text-dark-1" : "text-black-3",
-							"flex-1 break-all"
+							"flex-1 break-words"
 						)}
 					>
 						<Linkify

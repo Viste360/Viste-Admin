@@ -1,6 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit/react";
 import { Chat, ChatWithUser, UserChat } from "@/types/chat.type";
-import { getUsersChatsAction, sendMessageAction } from "../actions/chatAction";
+import {
+	getUsersChatsAction,
+	sendFileAction,
+	sendImageAction,
+	sendMessageAction,
+} from "../actions/chatAction";
 
 type ChatState = {
 	isLoading: boolean;
@@ -75,10 +80,86 @@ export const chatSlice = createSlice({
 				}
 
 				state.newChat = { ...newChat, user: newChat.user._id };
-
 			}
 		);
 		builders.addCase(sendMessageAction.rejected, (state) => {
+			state.newMessageStatus = "Failed";
+		});
+
+		// send new image
+		builders.addCase(sendImageAction.pending, (state) => {
+			state.newMessageStatus = "Sending";
+		});
+		builders.addCase(
+			sendImageAction.fulfilled,
+			(state, action: PayloadAction<ChatWithUser>) => {
+				state.newMessageStatus = "Success";
+
+				const newChat = action.payload;
+				const userIndex = state.usersChats.findIndex(
+					(item) => item.user._id === newChat.user._id
+				);
+				if (userIndex !== -1) {
+					state.usersChats[userIndex].chats.unshift({
+						...newChat,
+						user: newChat.user._id,
+					});
+
+					const updatedUser = state.usersChats.splice(userIndex, 1)[0];
+					state.usersChats.unshift(updatedUser);
+				} else {
+					state.usersChats.unshift({
+						user: newChat.user,
+						chats: [
+							{
+								...newChat,
+								user: newChat.user._id,
+							},
+						],
+					});
+				}
+
+				state.newChat = { ...newChat, user: newChat.user._id };
+			}
+		);
+		builders.addCase(sendImageAction.rejected, (state) => {
+			state.newMessageStatus = "Failed";
+		});
+
+		// send new file
+		builders.addCase(sendFileAction.pending, (state) => {
+			state.newMessageStatus = "Sending";
+		});
+		builders.addCase(sendFileAction.fulfilled, (state, action: PayloadAction<ChatWithUser>) => {
+			state.newMessageStatus = "Success";
+
+			const newChat = action.payload;
+			const userIndex = state.usersChats.findIndex(
+				(item) => item.user._id === newChat.user._id
+			);
+			if (userIndex !== -1) {
+				state.usersChats[userIndex].chats.unshift({
+					...newChat,
+					user: newChat.user._id,
+				});
+
+				const updatedUser = state.usersChats.splice(userIndex, 1)[0];
+				state.usersChats.unshift(updatedUser);
+			} else {
+				state.usersChats.unshift({
+					user: newChat.user,
+					chats: [
+						{
+							...newChat,
+							user: newChat.user._id,
+						},
+					],
+				});
+			}
+
+			state.newChat = { ...newChat, user: newChat.user._id };
+		});
+		builders.addCase(sendFileAction.rejected, (state) => {
 			state.newMessageStatus = "Failed";
 		});
 	},

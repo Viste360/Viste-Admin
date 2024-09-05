@@ -7,7 +7,12 @@ import {
 	signUpAction,
 	verifyEmailAction,
 } from "../actions/userAction";
-import { getUsersChatsAction, sendMessageAction } from "../actions/chatAction";
+import {
+	getUsersChatsAction,
+	sendFileAction,
+	sendImageAction,
+	sendMessageAction,
+} from "../actions/chatAction";
 
 type initialState = {
 	error?: string | null;
@@ -100,6 +105,16 @@ export const appSlice = createSlice({
 
 		// send new message
 		builders.addCase(sendMessageAction.rejected, (state, action) => {
+			state.error = action.payload;
+		});
+
+		// send new image
+		builders.addCase(sendImageAction.rejected, (state, action) => {
+			state.error = action.payload;
+		});
+		
+		// send new file
+		builders.addCase(sendFileAction.rejected, (state, action) => {
 			state.error = action.payload;
 		});
 	},

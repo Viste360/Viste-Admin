@@ -8,7 +8,7 @@ interface ChatFileProps {
 const ChatFile: React.FC<ChatFileProps> = ({ file }) => {
 	return (
 		<div className="my-3">
-			<a href={file?.url} download>
+			<a href={file?.url} download className="text-blue-1 underline">
 				{file?.name}
 			</a>
 		</div>
