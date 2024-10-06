@@ -8,11 +8,10 @@ import React, { useEffect } from "react";
 
 const Orders = () => {
 	useEffect(() => {
-		sendGAEvent({
-			hitType: "pageview",
-			page: window.location.pathname,
-			title: "GuestShop Order",
-		});
+		
+
+		
+		sendGAEvent("event", "pageview", { value: "GuestShop Order" });
 	}, []);
 	return (
 		<DashboardLayout>

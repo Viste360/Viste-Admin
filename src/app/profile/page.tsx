@@ -7,11 +7,10 @@ import React, { useEffect } from "react";
 
 const Profile = () => {
 	useEffect(() => {
-		sendGAEvent({
-			hitType: "pageview",
-			page: window.location.pathname,
-			title: "Profile",
-		});
+
+
+		sendGAEvent("event", "pageview", { value: "Profile" });
+
 	}, []);
 
 	return (

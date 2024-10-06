@@ -31,11 +31,7 @@ const Login = () => {
 		});
 
 	useEffect(() => {
-		sendGAEvent({
-			hitType: "pageview",
-			page: window.location.pathname,
-			title: "Login",
-		});
+		sendGAEvent("event", "pageview", { value: "Login" });
 	}, []);
 
 	useEffect(() => {

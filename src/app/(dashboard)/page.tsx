@@ -7,11 +7,7 @@ import { sendGAEvent } from "@next/third-parties/google";
 
 const Dashboard = () => {
 	useEffect(() => {
-		sendGAEvent({
-			hitType: "pageview",
-			page: window.location.pathname,
-			title: "Dashboard",
-		});
+		sendGAEvent("event", "pageview", { value: "Dashboard" });
 	}, []);
 
 	return (

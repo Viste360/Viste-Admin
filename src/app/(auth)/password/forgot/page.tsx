@@ -27,14 +27,9 @@ const ForgotPassword = () => {
 			},
 		});
 
-
-		useEffect(() => {
-			sendGAEvent({
-				hitType: "pageview",
-				page: window.location.pathname,
-				title: "Forgot Password",
-			});
-		}, []);
+	useEffect(() => {
+		sendGAEvent("event", "pageview", { value: "Forgot Password" });
+	}, []);
 
 	useEffect(() => {
 		if (formSubmitted) {

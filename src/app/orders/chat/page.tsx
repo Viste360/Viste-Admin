@@ -83,11 +83,7 @@ const Chats = () => {
 	useEffect(() => {
 		dispatch(getUsersChatsAction());
 
-		sendGAEvent({
-			hitType: "pageview",
-			page: window.location.pathname,
-			title: "GuestShop Chat",
-		});
+		sendGAEvent("event", "pageview", { value: "GuestShop Chat" });
 	}, []);
 
 	return (

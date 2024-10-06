@@ -20,11 +20,8 @@ const VerifyEmail = () => {
 	useEffect(() => {
 		dispatch(verifyEmailAction(token));
 
-		sendGAEvent({
-			hitType: "pageview",
-			page: window.location.pathname,
-			title: "Verify Password",
-		});
+		sendGAEvent("event", "pageview", { value: "Verify Password" });
+
 	}, []);
 
 	return (

@@ -30,14 +30,9 @@ const ResetPassword = () => {
 			},
 		});
 
-
-		useEffect(() => {
-			sendGAEvent({
-				hitType: "pageview",
-				page: window.location.pathname,
-				title: "Reset Password",
-			});
-		}, []);
+	useEffect(() => {
+		sendGAEvent("event", "pageview", { value: "Reset Password" });
+	}, []);
 
 	useEffect(
 		function () {

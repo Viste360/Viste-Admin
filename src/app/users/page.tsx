@@ -7,11 +7,7 @@ import React, { useEffect } from "react";
 
 const Users = () => {
 	useEffect(() => {
-		sendGAEvent({
-			hitType: "pageview",
-			page: window.location.pathname,
-			title: "Users",
-		});
+		sendGAEvent("event", "pageview", { value: "Users" });
 	}, []);
 
 	return (

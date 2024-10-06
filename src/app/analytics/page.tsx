@@ -2,9 +2,14 @@
 
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import AuthGuard from "@/hoc/AuthGuard";
-import React from "react";
+import { sendGAEvent } from "@next/third-parties/google";
+import React, { useEffect } from "react";
 
 const Analytics = () => {
+	useEffect(() => {
+		sendGAEvent("event", "pageview", { value: "Analytics" });
+	}, []);
+
 	return (
 		<DashboardLayout>
 			<main>Analytics</main>

@@ -10,6 +10,7 @@ import {
 } from "../api/userApi";
 import { AxiosError } from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { sendGAEvent } from "@next/third-parties/google";
 
 export const keepLoginAction = createAsyncThunk<User, void, { rejectValue: string }>(
 	"user/keeplogin",
@@ -17,6 +18,15 @@ export const keepLoginAction = createAsyncThunk<User, void, { rejectValue: strin
 		try {
 			const { data } = await keeploginApi();
 
+			sendGAEvent("event", "cookie-login", {
+				label: "User logged in using cookie",
+				userId: data.user._id,
+				userName: data.user.name,
+				userEmail: data.user.email as string,
+				value: {
+					...data.user,
+				},
+			});
 			return data.user;
 		} catch (err) {
 			if (err instanceof AxiosError) {
@@ -82,6 +92,16 @@ export const loginAction = createAsyncThunk<
 	try {
 		const { data } = await loginApi(payload);
 
+		sendGAEvent("event", "login", {
+			label: "User logged in from login page",
+			userId: data.user._id,
+			userName: data.user.name,
+			userEmail: data.user.email,
+			value: {
+				...data.user,
+			},
+		});
+
 		return data;
 	} catch (err) {
 		if (err instanceof AxiosError) {
@@ -101,6 +121,11 @@ export const logoutAction = createAsyncThunk<string, void, { rejectValue: string
 	async (_, thunkApi) => {
 		try {
 			const { data } = await logoutApi();
+
+			sendGAEvent("event", "logout", {
+				label: "User logged out",
+				value: data.message,
+			});
 
 			return data.message;
 		} catch (err) {

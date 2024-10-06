@@ -7,11 +7,7 @@ import React, { useEffect } from "react";
 
 const Support = () => {
 	useEffect(() => {
-		sendGAEvent({
-			hitType: "pageview",
-			page: window.location.pathname,
-			title: "Support",
-		});
+		sendGAEvent("event", "pageview", { value: "Support" });
 	}, []);
 
 	return (

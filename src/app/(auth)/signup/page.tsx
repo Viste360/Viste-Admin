@@ -30,11 +30,8 @@ const SignUp = () => {
 		});
 
 	useEffect(() => {
-		sendGAEvent({
-			hitType: "pageview",
-			page: window.location.pathname,
-			title: "Sign Up",
-		});
+		sendGAEvent("event", "pageview", { value: "Sign Up" });
+
 	}, []);
 
 	useEffect(() => {
