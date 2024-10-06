@@ -7,6 +7,7 @@ import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { verifyEmailAction } from "@/redux/actions/userAction";
 import { useParams, useRouter } from "next/navigation";
+import { sendGAEvent } from "@next/third-parties/google";
 
 const VerifyEmail = () => {
 	const dispatch = useAppDispatch();
@@ -18,6 +19,12 @@ const VerifyEmail = () => {
 
 	useEffect(() => {
 		dispatch(verifyEmailAction(token));
+
+		sendGAEvent({
+			hitType: "pageview",
+			page: window.location.pathname,
+			title: "Verify Password",
+		});
 	}, []);
 
 	return (

@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { forgotPasswordAction } from "@/redux/actions/userAction";
 import Link from "next/link";
 import { Spinner } from "@/components/ui/spinner";
+import { sendGAEvent } from "@next/third-parties/google";
 
 const ForgotPassword = () => {
 	const dispatch = useAppDispatch();
@@ -25,6 +26,15 @@ const ForgotPassword = () => {
 				dispatch(forgotPasswordAction(values));
 			},
 		});
+
+
+		useEffect(() => {
+			sendGAEvent({
+				hitType: "pageview",
+				page: window.location.pathname,
+				title: "Forgot Password",
+			});
+		}, []);
 
 	useEffect(() => {
 		if (formSubmitted) {

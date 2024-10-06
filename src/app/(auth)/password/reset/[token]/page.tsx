@@ -12,6 +12,7 @@ import { resetPasswordAction } from "@/redux/actions/userAction";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { Spinner } from "@/components/ui/spinner";
+import { sendGAEvent } from "@next/third-parties/google";
 
 const ResetPassword = () => {
 	const dispatch = useAppDispatch();
@@ -28,6 +29,15 @@ const ResetPassword = () => {
 				dispatch(resetPasswordAction({ payload: values, token }));
 			},
 		});
+
+
+		useEffect(() => {
+			sendGAEvent({
+				hitType: "pageview",
+				page: window.location.pathname,
+				title: "Reset Password",
+			});
+		}, []);
 
 	useEffect(
 		function () {

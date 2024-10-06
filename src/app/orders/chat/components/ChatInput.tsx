@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { sendImageAction, sendMessageAction } from "@/redux/actions/chatAction";
 import MicroPhone from "./MicroPhone";
-import { Popover, PopoverClose, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { IoCameraOutline, IoFolderOpenOutline, IoImageOutline } from "react-icons/io5";
 import { setError } from "@/redux/slices/appSlice";
 import { sendFileAction } from "@/redux/actions/chatAction";

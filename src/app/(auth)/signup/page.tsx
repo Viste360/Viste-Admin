@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { signUpAction } from "@/redux/actions/userAction";
 import Link from "next/link";
 import { Spinner } from "@/components/ui/spinner";
+import { sendGAEvent } from "@next/third-parties/google";
 
 const SignUp = () => {
 	const dispatch = useAppDispatch();
@@ -27,6 +28,14 @@ const SignUp = () => {
 				dispatch(signUpAction(values));
 			},
 		});
+
+	useEffect(() => {
+		sendGAEvent({
+			hitType: "pageview",
+			page: window.location.pathname,
+			title: "Sign Up",
+		});
+	}, []);
 
 	useEffect(() => {
 		if (formSubmitted) {

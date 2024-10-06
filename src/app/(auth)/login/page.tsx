@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
 import { Spinner } from "@/components/ui/spinner";
+import { sendGAEvent } from "@next/third-parties/google";
 
 const Login = () => {
 	const dispatch = useAppDispatch();
@@ -28,6 +29,14 @@ const Login = () => {
 				dispatch(loginAction(values));
 			},
 		});
+
+	useEffect(() => {
+		sendGAEvent({
+			hitType: "pageview",
+			page: window.location.pathname,
+			title: "Login",
+		});
+	}, []);
 
 	useEffect(() => {
 		if (formSubmitted) {
@@ -80,7 +89,10 @@ const Login = () => {
 									Remember for 30 days
 								</Label>
 							</div>
-							<Link className="lg:text-red-3 text-white-1 text-sm" href={"/password/forgot"}>
+							<Link
+								className="lg:text-red-3 text-white-1 text-sm"
+								href={"/password/forgot"}
+							>
 								Forgot password
 							</Link>
 						</div>

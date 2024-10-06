@@ -16,6 +16,7 @@ import { Chat } from "@/types/chat.type";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { clearNewChat } from "@/redux/slices/chatSlice";
 import { MdOutlineArrowBackIos } from "react-icons/md";
+import { sendGAEvent } from "@next/third-parties/google";
 
 const Chats = () => {
 	const [searchKeyword, setSearchKeyword] = useState<string>("");
@@ -81,6 +82,12 @@ const Chats = () => {
 
 	useEffect(() => {
 		dispatch(getUsersChatsAction());
+
+		sendGAEvent({
+			hitType: "pageview",
+			page: window.location.pathname,
+			title: "GuestShop Chat",
+		});
 	}, []);
 
 	return (
