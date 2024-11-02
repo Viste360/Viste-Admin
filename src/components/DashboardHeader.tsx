@@ -7,12 +7,14 @@ type DashboardHeaderProps = {
 	subTitle: string;
 	exp?: boolean;
 	expCallback?: () => void;
+	expType: string;
 };
 
 const DashboardHeader: React.FC<DashboardHeaderProps> = ({
 	title,
 	subTitle,
 	exp = false,
+	expType,
 	expCallback,
 }) => {
 	return (
@@ -24,7 +26,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
 			{exp && (
 				<Button variant="outline" className="space-x-2 font-medium" onClick={expCallback}>
 					<FiDownloadCloud size={20} />
-					<span>Export Stats</span>
+					<span>Export {expType}</span>
 				</Button>
 			)}
 		</div>

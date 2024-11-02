@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./slices/userSlice";
 import appReducer from "./slices/appSlice";
 import chatReducer from "./slices/chatSlice";
+import analyticsReducer from "./slices/analyticsSlice";
 
 export const makeStore = () => {
 	return configureStore({
@@ -9,6 +10,7 @@ export const makeStore = () => {
 			userState: userReducer,
 			appState: appReducer,
 			chatState: chatReducer,
+			analyticsState: analyticsReducer,
 		},
 	});
 };

@@ -8,7 +8,7 @@ interface SubNavigationProps {
 
 const SubNavigation: React.FC<SubNavigationProps> = ({ navItems }) => {
 	return (
-		<div className="w-min border-b-2 border-white-3 flex px-4 my-4 space-x-2">
+		<div className="w-min border-b-2 border-white-3 flex my-4 space-x-2">
 			{navItems.map((item, index) => (
 				<SubNavItem label={item.label} route={item.route} key={index} />
 			))}

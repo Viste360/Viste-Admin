@@ -3,7 +3,7 @@
 import FormInput from "@/components/FormInput";
 import AuthLayout from "@/components/layout/AuthLayout";
 import { Button } from "@/components/ui/button";
-import UnAuthGuard from "@/hoc/UnAuthGuard";
+import UnAuthGuard from "@/components/hoc/UnAuthGuard";
 import React, { useEffect } from "react";
 import validationSchema from "./validationSchema";
 import { useFormik } from "formik";
@@ -31,7 +31,6 @@ const SignUp = () => {
 
 	useEffect(() => {
 		sendGAEvent("event", "pageview", { value: "Sign Up" });
-
 	}, []);
 
 	useEffect(() => {

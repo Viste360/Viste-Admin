@@ -21,7 +21,7 @@ const navItems: SubNavigationItem[] = [
 
 const GuestShopLayout: React.FC<GuestShopLayoutProps> = ({ children, type = "orders" }) => {
 	const exportOrders = () => {
-		console.log("Export");
+		console.log("Export Stats");
 	};
 
 	const searchOrder = (keyword: string): void => {
@@ -34,6 +34,7 @@ const GuestShopLayout: React.FC<GuestShopLayoutProps> = ({ children, type = "ord
 				title="GuestShop Orders"
 				subTitle="Tagline will go here"
 				exp={type === "orders" ? true : false}
+				expType="Stats"
 				expCallback={exportOrders}
 			/>
 			<SubNavigation navItems={navItems} />

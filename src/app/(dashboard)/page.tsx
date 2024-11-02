@@ -1,7 +1,7 @@
 "use client";
 
 import DashboardLayout from "@/components/layout/DashboardLayout";
-import AuthGuard from "@/hoc/AuthGuard";
+import AuthGuard from "@/components/hoc/AuthGuard";
 import React, { useEffect } from "react";
 import { sendGAEvent } from "@next/third-parties/google";
 

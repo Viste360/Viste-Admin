@@ -13,6 +13,7 @@ import {
 	sendImageAction,
 	sendMessageAction,
 } from "../actions/chatAction";
+import { getGoogleAnalyticsData } from "../actions/analyticsAction";
 
 type initialState = {
 	error?: string | null;
@@ -115,6 +116,11 @@ export const appSlice = createSlice({
 		
 		// send new file
 		builders.addCase(sendFileAction.rejected, (state, action) => {
+			state.error = action.payload;
+		});
+
+		// get google analytics data
+		builders.addCase(getGoogleAnalyticsData.rejected, (state, action) => {
 			state.error = action.payload;
 		});
 	},

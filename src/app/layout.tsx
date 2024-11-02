@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import AuthProvider from "@/providers/AuthProvider";
-import StoreProvider from "@/providers/StoreProvider";
-import ToastProvider from "@/providers/ToastProvider";
+import AuthProvider from "@/components/providers/AuthProvider";
+import StoreProvider from "@/components/providers/StoreProvider";
+import ToastProvider from "@/components/providers/ToastProvider";
 import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });

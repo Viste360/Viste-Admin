@@ -2,7 +2,7 @@
 
 import AuthLayout from "@/components/layout/AuthLayout";
 import { Button } from "@/components/ui/button";
-import UnAuthGuard from "@/hoc/UnAuthGuard";
+import UnAuthGuard from "@/components/hoc/UnAuthGuard";
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { verifyEmailAction } from "@/redux/actions/userAction";
@@ -21,7 +21,6 @@ const VerifyEmail = () => {
 		dispatch(verifyEmailAction(token));
 
 		sendGAEvent("event", "pageview", { value: "Verify Password" });
-
 	}, []);
 
 	return (

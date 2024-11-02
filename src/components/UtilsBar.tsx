@@ -20,7 +20,7 @@ const UtilsBar: React.FC<UtilsBarProps> = ({ onSearch }) => {
 	};
 
 	return (
-		<div className="flex justify-between items-center mx-4">
+		<div className="flex justify-between items-center">
 			<SearchInput
 				value={searchKeyword}
 				placeholder="Search"
