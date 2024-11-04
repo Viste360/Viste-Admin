@@ -1,15 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit/react";
 import { getGoogleAnalyticsData } from "../actions/analyticsAction";
-import { GoogleAnalyticsData } from "@/types/analytics.type";
+import { GoogleAnalyticsData, MonthlyDataItem, ReportData } from "@/types/analytics.type";
 
 type AnalyticsState = {
 	isLoading: boolean;
-	reportData: GoogleAnalyticsData | null;
+	reportData: ReportData | null;
+	monthlyData: MonthlyDataItem[] ;
 };
 
 const initialState: AnalyticsState = {
 	isLoading: true,
 	reportData: null,
+	monthlyData: [],
 };
 
 export const analyticsSlice = createSlice({
@@ -25,7 +27,8 @@ export const analyticsSlice = createSlice({
 			getGoogleAnalyticsData.fulfilled,
 			(state, action: PayloadAction<GoogleAnalyticsData>) => {
 				state.isLoading = false;
-				state.reportData = action.payload;
+				state.reportData = action.payload.reportData
+				state.monthlyData = action.payload.monthlyData
 			}
 		);
 		builders.addCase(getGoogleAnalyticsData.rejected, (state) => {
