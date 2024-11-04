@@ -3,42 +3,19 @@
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import AuthGuard from "@/components/hoc/AuthGuard";
 import { sendGAEvent } from "@next/third-parties/google";
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import DashboardHeader from "@/components/DashboardHeader";
 import UtilsBar from "@/components/UtilsBar";
 import Image from "next/image";
-import numeral from "numeral";
-import humanizeDuration from "humanize-duration";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { getGoogleAnalyticsData } from "@/redux/actions/analyticsAction";
+import AnalyticsLineChart from "./components/AnalyticsLineChart";
+import { MonthlyDataItem } from "@/types/analytics.type";
+import { formatBounceRate, formatDuration, formatNumber } from "@/utils/formatAnalyticsData";
 
 const Analytics = () => {
-	const { isLoading, reportData } = useAppSelector((state) => state.analyticsState);
+	const { isLoading, reportData, monthlyData } = useAppSelector((state) => state.analyticsState);
 	const dispatch = useAppDispatch();
-
-	useEffect(() => {
-		sendGAEvent("event", "pageview", { value: "Analytics" });
-		dispatch(getGoogleAnalyticsData());
-	}, []);
-
-	const formatNumber = useCallback((num: number) => numeral(num).format("0.[0]a"), []);
-
-	const formatDuration = useCallback((seconds: number) => {
-		const formattedDuration = humanizeDuration(seconds * 1000, {
-			units: ["d", "h", "m", "s"],
-			round: true,
-			largest: 2,
-			delimiter: " ",
-			spacer: "",
-			language: "en",
-		})
-			.replace(/days?/g, "d")
-			.replace(/hours?/g, "h")
-			.replace(/minutes?/g, "m")
-			.replace(/seconds?/g, "s");
-
-		return formattedDuration;
-	}, []);
 
 	const formattedDuration = useMemo(() => {
 		if (reportData && reportData.totalSessionDuration) {
@@ -46,6 +23,68 @@ const Analytics = () => {
 		}
 		return null;
 	}, [reportData, formatDuration]);
+
+	const formattedTotalVisitors = useMemo(() => {
+		if (reportData && reportData.totalVisitors) {
+			return formatNumber(reportData.totalVisitors);
+		}
+		return null;
+	}, [reportData, formatNumber]);
+
+	const formattedTotalPageViews = useMemo(() => {
+		if (reportData && reportData.totalPageViews) {
+			return formatNumber(reportData.totalPageViews);
+		}
+		return null;
+	}, [reportData, formatNumber]);
+
+	const formattedBounceRate = useMemo(() => {
+		if (reportData && reportData.bounceRate) {
+			return formatBounceRate(reportData.bounceRate);
+		}
+		return null;
+	}, [reportData, formatBounceRate]);
+
+	// const data: MonthlyDataItem[] = [
+	// 	{ month: "1", deviceCategory: "desktop", activeUsers: 6356 },
+	// 	{ month: "1", deviceCategory: "mobile", activeUsers: 5433 },
+	// 	{ month: "1", deviceCategory: "tablet", activeUsers: 4833 },
+	// 	{ month: "2", deviceCategory: "desktop", activeUsers: 9334 },
+	// 	{ month: "2", deviceCategory: "mobile", activeUsers: 8739 },
+	// 	{ month: "2", deviceCategory: "tablet", activeUsers: 7678 },
+	// 	{ month: "3", deviceCategory: "desktop", activeUsers: 8675 },
+	// 	{ month: "3", deviceCategory: "mobile", activeUsers: 7542 },
+	// 	{ month: "3", deviceCategory: "tablet", activeUsers: 6433 },
+	// 	{ month: "4", deviceCategory: "desktop", activeUsers: 6543 },
+	// 	{ month: "4", deviceCategory: "mobile", activeUsers: 5333 },
+	// 	{ month: "4", deviceCategory: "tablet", activeUsers: 4345 },
+	// 	{ month: "5", deviceCategory: "desktop", activeUsers: 9335 },
+	// 	{ month: "5", deviceCategory: "mobile", activeUsers: 8336 },
+	// 	{ month: "5", deviceCategory: "tablet", activeUsers: 7030 },
+	// 	{ month: "6", deviceCategory: "desktop", activeUsers: 7398 },
+	// 	{ month: "6", deviceCategory: "mobile", activeUsers: 6636 },
+	// 	{ month: "6", deviceCategory: "tablet", activeUsers: 5765 },
+	// 	{ month: "7", deviceCategory: "desktop", activeUsers: 6385 },
+	// 	{ month: "7", deviceCategory: "mobile", activeUsers: 5564 },
+	// 	{ month: "7", deviceCategory: "tablet", activeUsers: 5334 },
+	// 	{ month: "8", deviceCategory: "desktop", activeUsers: 7313 },
+	// 	{ month: "8", deviceCategory: "mobile", activeUsers: 6532 },
+	// 	{ month: "8", deviceCategory: "tablet", activeUsers: 6221 },
+	// 	{ month: "9", deviceCategory: "desktop", activeUsers: 7345 },
+	// 	{ month: "9", deviceCategory: "mobile", activeUsers: 6453 },
+	// 	{ month: "9", deviceCategory: "tablet", activeUsers: 5313 },
+	// 	{ month: "10", deviceCategory: "desktop", activeUsers: 9132 },
+	// 	{ month: "10", deviceCategory: "mobile", activeUsers: 8334 },
+	// 	{ month: "10", deviceCategory: "tablet", activeUsers: 7243 },
+	// 	{ month: "11", deviceCategory: "desktop", activeUsers: 8343 },
+	// 	{ month: "11", deviceCategory: "mobile", activeUsers: 7333 },
+	// 	{ month: "11", deviceCategory: "tablet", activeUsers: 6434 },
+	// ];
+
+	useEffect(() => {
+		sendGAEvent("event", "pageview", { value: "Analytics" });
+		dispatch(getGoogleAnalyticsData());
+	}, []);
 
 	const exportCSV = () => {
 		console.log("Export CSV");
@@ -66,7 +105,7 @@ const Analytics = () => {
 					expCallback={exportCSV}
 				/>
 				<UtilsBar onSearch={searchHandler} />
-				<div className="flex justify-between items-start py-6 border-b border-wmr-6">
+				<div className="flex justify-between items-start py-6 border-b border-white-3">
 					<h3 className="text-lg">Overview</h3>
 
 					<Image
@@ -80,15 +119,11 @@ const Analytics = () => {
 				<div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
 					<div className="flex flex-col items-start justify-center p-4">
 						<h6 className="text-black-4 font-medium">Total Visitors</h6>
-						<h2>
-							{!isLoading && reportData && formatNumber(reportData.totalVisitors)}
-						</h2>
+						<h2>{formattedTotalVisitors}</h2>
 					</div>
 					<div className="flex flex-col items-start justify-center p-2 sm:p-4">
 						<h6 className="text-black-4 font-medium">Page Views</h6>
-						<h2>
-							{!isLoading && reportData && formatNumber(reportData.totalPageViews)}
-						</h2>
+						<h2>{formattedTotalPageViews}</h2>
 					</div>
 					<div className="flex flex-col items-start justify-center p-4">
 						<h6 className="text-black-4 font-medium">Session Duration</h6>
@@ -96,13 +131,10 @@ const Analytics = () => {
 					</div>
 					<div className="flex flex-col items-start justify-center p-4">
 						<h6 className="text-black-4 font-medium">Bounce Rate</h6>
-						<h2>
-							{!isLoading &&
-								reportData &&
-								(reportData.bounceRate * 100).toFixed(1) + "%"}
-						</h2>
+						<h2>{formattedBounceRate}</h2>
 					</div>
 				</div>
+				<div>{!isLoading && <AnalyticsLineChart data={monthlyData} />}</div>
 			</div>
 		</DashboardLayout>
 	);

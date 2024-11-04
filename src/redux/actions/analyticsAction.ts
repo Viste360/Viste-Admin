@@ -10,9 +10,11 @@ export const getGoogleAnalyticsData = createAsyncThunk<
 	{ rejectValue: string }
 >("analytics/googleAnalytics", async (_, thunkApi) => {
 	try {
-		const { data } = await getGoogleAnalyticsDataApi();
+		const {
+			data: { reportData, monthlyData },
+		} = await getGoogleAnalyticsDataApi();
 
-		return data.reportData;
+		return { reportData, monthlyData };
 	} catch (err) {
 		if (err instanceof AxiosError) {
 			if (err.response?.data.message) {
