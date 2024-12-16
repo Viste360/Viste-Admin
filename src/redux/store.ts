@@ -3,6 +3,7 @@ import userReducer from "./slices/userSlice";
 import appReducer from "./slices/appSlice";
 import chatReducer from "./slices/chatSlice";
 import analyticsReducer from "./slices/analyticsSlice";
+import whatsappReducer from "./slices/whatsappSlice";
 
 export const makeStore = () => {
 	return configureStore({
@@ -11,6 +12,7 @@ export const makeStore = () => {
 			appState: appReducer,
 			chatState: chatReducer,
 			analyticsState: analyticsReducer,
+			whatsappState: whatsappReducer,
 		},
 	});
 };
