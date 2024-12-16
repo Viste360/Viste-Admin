@@ -14,6 +14,7 @@ import {
 	sendMessageAction,
 } from "../actions/chatAction";
 import { getGoogleAnalyticsData } from "../actions/analyticsAction";
+import { getWhatsappData } from "../actions/whatsappAction";
 
 type initialState = {
 	error?: string | null;
@@ -121,6 +122,11 @@ export const appSlice = createSlice({
 
 		// get google analytics data
 		builders.addCase(getGoogleAnalyticsData.rejected, (state, action) => {
+			state.error = action.payload;
+		});
+
+		// get whatsapp dashboard data
+		builders.addCase(getWhatsappData.rejected, (state, action) => {
 			state.error = action.payload;
 		});
 	},

@@ -2,6 +2,7 @@ import Image from "next/image";
 import React, { ChangeEvent, KeyboardEvent, ReactNode, useState } from "react";
 import SearchInput from "../SearchInput";
 import { LuFlag, LuHome, LuLayers, LuLogOut, LuMenu, LuSettings, LuUsers } from "react-icons/lu";
+import { ImWhatsapp } from "react-icons/im";
 import { FiBarChart2 } from "react-icons/fi";
 import { NavigationItem } from "@/types/app.type";
 import NavItem from "../NavItem";
@@ -41,6 +42,11 @@ const mainNavigation: NavigationItem[] = [
 		label: "Analytics",
 		route: "/analytics",
 		icon: FiBarChart2,
+	},
+	{
+		label: "Whatsapp Manager",
+		route: "/whatsapp",
+		icon: ImWhatsapp,
 	},
 ];
 
@@ -244,7 +250,9 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
 					</div>
 				</div>
 			</div>
-			<div className="bg-white-1 flex-1 lg:rounded-tl-[32px] lg:mt-8 px-2 sm:px-4 lg:px-8 pt-8">{children}</div>
+			<div className="bg-white-1 flex-1 lg:rounded-tl-[32px] lg:mt-8 px-2 sm:px-4 lg:px-8 pt-8">
+				{children}
+			</div>
 		</div>
 	);
 };

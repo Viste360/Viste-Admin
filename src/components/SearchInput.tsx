@@ -28,7 +28,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
 				<div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
 					<Image
 						src={icon}
-						alt="search"
+						alt="Search"
 						width={16}
 						height={16}
 						className="object-contain"
@@ -42,7 +42,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
 					value={value}
 					autoComplete="on"
 					className={cn(
-						"h-11 placeholder:text-base placeholder:font-normal pl-9 focus-visible:outline-none focus-visible:ring-0 transition-colors",
+						"h-11 placeholder:text-base placeholder:font-normal placeholder:capitalize pl-9 focus-visible:outline-none focus-visible:ring-0 transition-colors",
 						className
 					)}
 				/>
